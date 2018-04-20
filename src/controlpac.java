@@ -1,6 +1,9 @@
 import java.io.*;
+import java.util.Scanner;
 class bdatoa
 {
+	private Scanner sc;
+
 	public static void ps(String x)
         {
           System.out.print(x);
@@ -28,10 +31,43 @@ class bdatoa
 	    double ne=0;
 		return(línea);		
 		}
+    
+    public static void login() throws IOException 
+    {
+    	String usuario, contraseña;
+    	
+    	while(true)
+	    	{ 
+	    	try{
+	    		ps("Ingrese el usuario : ");
+	    		usuario = LeerCadena();
+	    		ps("ingrese la contraseña : ");
+	    		contraseña = LeerCadena();
+	    		File f = new File("login.in");
+	    		Scanner sc = new Scanner(f);
+	    		
+	    		while(sc.hasNextLine())
+	    		{
+	    			String user = sc.next();
+	    			String pass = sc.next();
+	    			if(usuario.equals(user) && contraseña.equals(pass)) 
+	    				return;
+	    		}
+	    		 
+	    		}catch(FileNotFoundException e){
+	    		System.out.println("El archivo no existe...");
+	    		System.exit(0);
+	    		}
+	    	ps("Error al ingresar usuario o contraseña\n");
+	    
+	    	
+	    }
+    }
      	   
     public static void main(String args[])
     throws Exception
     {
+     login();
      String op="";
      int sw=0, sw1=0;
      int op1,op2,op3;  //variables de selección usadas en los diferentes menús 

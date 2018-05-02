@@ -47,7 +47,7 @@ class bdatoa {
 				usuario = LeerCadena();
 				ps("ingrese la contraseña : ");
 				contraseña = LeerCadena();
-				File f = new File("login.in");
+				File f = new File("./login.in");
 				Scanner sc = new Scanner(f);
 
 				while (sc.hasNextLine()) {
@@ -124,7 +124,7 @@ class bdatoa {
 					switch (op2) {
 					case 1: // ingreso de datos, datos del paciente
 						DataOutputStream datopac = null;
-						datopac = new DataOutputStream(new FileOutputStream("C:\\datopac.txt"));
+						datopac = new DataOutputStream(new FileOutputStream("./datopac.txt"));
 						try {
 
 							do {
@@ -156,7 +156,7 @@ class bdatoa {
 					// ingreso de datos, situacion del paciente
 					case 2:
 						DataOutputStream situpac = null;
-						situpac = new DataOutputStream(new FileOutputStream("C:\\situpac.txt"));
+						situpac = new DataOutputStream(new FileOutputStream("./situpac.txt"));
 
 						try {
 							do {
@@ -188,7 +188,7 @@ class bdatoa {
 
 					case 3:
 						DataOutputStream datomed = null;
-						datomed = new DataOutputStream(new FileOutputStream("C:\\datomed.txt"));
+						datomed = new DataOutputStream(new FileOutputStream("./datomed.txt"));
 						try {
 							do {
 
@@ -248,7 +248,7 @@ class bdatoa {
 								codtem = LeerCadena();
 
 								DataInputStream datomed = null;
-								datomed = new DataInputStream(new FileInputStream("C:\\datomed.txt"));
+								datomed = new DataInputStream(new FileInputStream("./datomed.txt"));
 
 								sw = 1;
 								while (sw != 0) {
@@ -267,7 +267,7 @@ class bdatoa {
 									{
 										ps("::: El medico " + nomm + " atiende a los siguientes pacientes: " + "\n");
 										DataInputStream situpac = null;
-										situpac = new DataInputStream(new FileInputStream("C:\\situpac.txt"));
+										situpac = new DataInputStream(new FileInputStream("./situpac.txt"));
 
 										sw = 1;
 										while (sw != 0) {
@@ -282,7 +282,7 @@ class bdatoa {
 												{
 													DataInputStream datopac = null;
 													datopac = new DataInputStream(
-															new FileInputStream("C:\\datopac.txt"));
+															new FileInputStream("./datopac.txt"));
 
 													sw1 = 1;
 													while (sw1 != 0) {
@@ -320,7 +320,7 @@ class bdatoa {
 							codtem = LeerCadena();
 
 							DataInputStream datomed = null;
-							datomed = new DataInputStream(new FileInputStream("C:\\datomed.txt"));
+							datomed = new DataInputStream(new FileInputStream("./datomed.txt"));
 
 							sw1 = 1;
 							while (sw1 != 0) {
@@ -336,7 +336,7 @@ class bdatoa {
 										ps("El medico " + nomm + " trata las siguientes enfermedades:" + "\n");
 
 										DataInputStream situpac = null;
-										situpac = new DataInputStream(new FileInputStream("C:\\situpac.txt"));
+										situpac = new DataInputStream(new FileInputStream("./situpac.txt"));
 
 										sw = 1;
 										while (sw != 0) {

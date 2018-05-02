@@ -123,101 +123,15 @@ class bdatoa {
 
 					switch (op2) {
 					case 1: // ingreso de datos, datos del paciente
-						DataOutputStream datopac = null;
-						datopac = new DataOutputStream(new FileOutputStream("./datopac.txt"));
-						try {
-
-							do {
-
-								ps("   ..............................................." + "\n");
-								ps("   :-:  - D A T O S  D E L  P A C I E N T E -  :-:" + "\n");
-								ps("   :-:.........................................:-:" + "\n");
-
-								ps("Digite el codigo del paciente: ");
-								codpac = LeerCadena();
-								datopac.writeUTF(codpac);
-								ps("Digite el nombre del paciente: ");
-								nompac = LeerCadena();
-
-								datopac.writeUTF(nompac);
-
-								ps("Desea ingresar otro paciente? S/N" + "\n");
-
-								op = LeerCadena();
-
-							} while (op.equals("S") || op.equals("s"));
-							datopac.close();
-
-						} catch (IOException ioe) {
-						}
-						;
-
+						ingresoPacientes();
 						break;
 					// ingreso de datos, situacion del paciente
 					case 2:
-						DataOutputStream situpac = null;
-						situpac = new DataOutputStream(new FileOutputStream("./situpac.txt"));
-
-						try {
-							do {
-
-								ps("   ....................................................." + "\n");
-								ps("   :-: - S I T U A C I O N  D E L  P A C I E N T E - :-:" + "\n");
-								ps("   :-:...............................................:-:" + "\n");
-
-								ps("Digite el codigo del paciente: ");
-								codp = LeerCadena();
-								situpac.writeUTF(codp);
-								ps("Digite el codigo del medico: ");
-								codm = LeerCadena();
-								situpac.writeUTF(codm);
-								ps("Digite el diagnostico del medico: ");
-								enfpac = LeerCadena();
-								situpac.writeUTF(enfpac);
-
-								ps("Desea ingresar otro registro al historial? S/N");
-								ps("\n");
-								op = LeerCadena();
-
-							} while (op.equals("S") || op.equals("s"));
-							situpac.close();
-						} catch (IOException ioe) {
-						}
-						;
+						codm = ingresoDiagnosticos(codm);
 						break;
 
 					case 3:
-						DataOutputStream datomed = null;
-						datomed = new DataOutputStream(new FileOutputStream("./datomed.txt"));
-						try {
-							do {
-
-								ps("   ....................................................." + "\n");
-								ps("   :-:      - D A T O S   D E L   M E D I C O -      :-:" + "\n");
-								ps("   :-:...............................................:-:" + "\n");
-
-								ps("Digite el codigo del medico: ");
-								codmed = LeerCadena();
-								datomed.writeUTF(codmed);
-
-								ps("Digite el nombre del medico: ");
-								nommed = LeerCadena();
-								datomed.writeUTF(nommed);
-
-								ps("Digite la especializacion del medico: ");
-								espmed = LeerCadena();
-								datomed.writeUTF(espmed);
-
-								ps("Desea ingresar otro medico? S/N");
-								ps("\n");
-
-								op = LeerCadena();
-
-							} while (op.equals("S") || op.equals("s"));
-						} catch (IOException ioe) {
-						}
-						;
-						datomed.close();
+						ingresoMedicos();
 					}
 				} while (op2 != 4);
 			} else {
@@ -371,5 +285,113 @@ class bdatoa {
 			}
 		} while (op1 != 3);
 
+	}
+
+	private static void ingresoMedicos() throws FileNotFoundException, IOException {
+		String op;
+		String codmed;
+		String nommed;
+		String espmed;
+		DataOutputStream datomed = null;
+		datomed = new DataOutputStream(new FileOutputStream("./datomed.txt"));
+		try {
+			do {
+
+				ps("   ....................................................." + "\n");
+				ps("   :-:      - D A T O S   D E L   M E D I C O -      :-:" + "\n");
+				ps("   :-:...............................................:-:" + "\n");
+
+				ps("Digite el codigo del medico: ");
+				codmed = LeerCadena();
+				datomed.writeUTF(codmed);
+
+				ps("Digite el nombre del medico: ");
+				nommed = LeerCadena();
+				datomed.writeUTF(nommed);
+
+				ps("Digite la especializacion del medico: ");
+				espmed = LeerCadena();
+				datomed.writeUTF(espmed);
+
+				ps("Desea ingresar otro medico? S/N");
+				ps("\n");
+
+				op = LeerCadena();
+
+			} while (op.equals("S") || op.equals("s"));
+		} catch (IOException ioe) {
+		}
+		;
+		datomed.close();
+	}
+
+	private static String ingresoDiagnosticos(String codm) throws FileNotFoundException {
+		String op;
+		String enfpac;
+		String codp;
+		DataOutputStream situpac = null;
+		situpac = new DataOutputStream(new FileOutputStream("./situpac.txt"));
+
+		try {
+			do {
+
+				ps("   ....................................................." + "\n");
+				ps("   :-: - S I T U A C I O N  D E L  P A C I E N T E - :-:" + "\n");
+				ps("   :-:...............................................:-:" + "\n");
+
+				ps("Digite el codigo del paciente: ");
+				codp = LeerCadena();
+				situpac.writeUTF(codp);
+				ps("Digite el codigo del medico: ");
+				codm = LeerCadena();
+				situpac.writeUTF(codm);
+				ps("Digite el diagnostico del medico: ");
+				enfpac = LeerCadena();
+				situpac.writeUTF(enfpac);
+
+				ps("Desea ingresar otro registro al historial? S/N");
+				ps("\n");
+				op = LeerCadena();
+
+			} while (op.equals("S") || op.equals("s"));
+			situpac.close();
+		} catch (IOException ioe) {
+		}
+		;
+		return codm;
+	}
+
+	private static void ingresoPacientes() throws FileNotFoundException {
+		String op;
+		String codpac;
+		String nompac;
+		DataOutputStream datopac = null;
+		datopac = new DataOutputStream(new FileOutputStream("./datopac.txt"));
+		try {
+
+			do {
+
+				ps("   ..............................................." + "\n");
+				ps("   :-:  - D A T O S  D E L  P A C I E N T E -  :-:" + "\n");
+				ps("   :-:.........................................:-:" + "\n");
+
+				ps("Digite el codigo del paciente: ");
+				codpac = LeerCadena();
+				datopac.writeUTF(codpac);
+				ps("Digite el nombre del paciente: ");
+				nompac = LeerCadena();
+
+				datopac.writeUTF(nompac);
+
+				ps("Desea ingresar otro paciente? S/N" + "\n");
+
+				op = LeerCadena();
+
+			} while (op.equals("S") || op.equals("s"));
+			datopac.close();
+
+		} catch (IOException ioe) {
+		}
+		;
 	}
 }

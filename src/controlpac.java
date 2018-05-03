@@ -2,8 +2,6 @@ import java.io.*;
 import java.util.Scanner;
 
 class bdatoa {
-	private Scanner sc;
-
 	public static void ps(String x) {
 		System.out.print(x);
 
@@ -34,7 +32,6 @@ class bdatoa {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		double ne = 0;
 		return (línea);
 	}
 
@@ -68,18 +65,7 @@ class bdatoa {
 
 	public static void main(String args[]) throws Exception {
 		login();
-		String op = "";
-		int sw = 0, sw1 = 0;
-		int op1, op2, op3; // variables de selección usadas en los diferentes menús
-		String codpac, cp, nompac, codmed, cm, enfpac, nommed, espmed; // variables usadas en el registro de datos
-		String codp = "", codpa = "", nomp = "", nompa = "", codm = "", codme = "", enfp = "", nomm = "", espm = ""; // variables
-																														// usadas
-																														// en
-																														// la
-																														// lectura
-																														// de
-																														// datos
-		String codtem; // variables auxiliares temporales
+		int op1, op2; // variables de selección usadas en los diferentes menús
 
 		do {
 			op1 = 0;
@@ -127,9 +113,8 @@ class bdatoa {
 						break;
 					// ingreso de datos, situacion del paciente
 					case 2:
-						codm = ingresoDiagnosticos(codm);
+						ingresoDiagnosticos();
 						break;
-
 					case 3:
 						ingresoMedicos();
 					}
@@ -156,126 +141,11 @@ class bdatoa {
 
 						switch (op2) {
 						case 1:
-							try {
-
-								ps("Digite el codigo del medico que desea consultar: ");
-								codtem = LeerCadena();
-
-								DataInputStream datomed = null;
-								datomed = new DataInputStream(new FileInputStream("./datomed.txt"));
-
-								sw = 1;
-								while (sw != 0) {
-									try {
-										codm = datomed.readUTF();
-										nomm = datomed.readUTF();
-										espm = datomed.readUTF();
-
-									} catch (EOFException e) {
-										sw = 0;
-									}
-
-									if (codm.equals(codtem)) // compara el codigo extraido de la
-																// tabla "datomed" con el codigo
-																// digitado
-									{
-										ps("::: El medico " + nomm + " atiende a los siguientes pacientes: " + "\n");
-										DataInputStream situpac = null;
-										situpac = new DataInputStream(new FileInputStream("./situpac.txt"));
-
-										sw = 1;
-										while (sw != 0) {
-											try {
-												codp = situpac.readUTF();
-												codme = situpac.readUTF();
-												enfp = situpac.readUTF();
-
-												if (codme.equals(codtem)) // compara el codigo medico de la
-																			// tabla "datomed" con el de la
-																			// tabla "situpac"
-												{
-													DataInputStream datopac = null;
-													datopac = new DataInputStream(
-															new FileInputStream("./datopac.txt"));
-
-													sw1 = 1;
-													while (sw1 != 0) {
-														try {
-															codpa = datopac.readUTF();
-															nompa = datopac.readUTF();
-
-															if (codpa.equals(codp)) // compara el codigo del
-																					// paciente de la tabla "situpac"
-																					// con el codigo del paciente de
-																					// la tabla "datopac"
-															{
-																ps("::: Paciente: " + nompa + "\n");
-															}
-														} catch (EOFException e) {
-															sw1 = 0;
-														}
-													}
-												}
-											} catch (EOFException e) {
-												sw = 0;
-											}
-										}
-									}
-								}
-
-							} catch (IOException ioe) {
-							}
-							;
+							listaPacXMed();
 							break;
 
 						case 2:
-
-							ps("Digite el codigo del medico que desea consultar: ");
-							codtem = LeerCadena();
-
-							DataInputStream datomed = null;
-							datomed = new DataInputStream(new FileInputStream("./datomed.txt"));
-
-							sw1 = 1;
-							while (sw1 != 0) {
-								try {
-									codm = datomed.readUTF();
-									nomm = datomed.readUTF();
-									espm = datomed.readUTF();
-
-									if (codm.equals(codtem)) // compara el codigo digitado
-																// con el codigo del medico de la
-																// tabla "datomed"
-									{
-										ps("El medico " + nomm + " trata las siguientes enfermedades:" + "\n");
-
-										DataInputStream situpac = null;
-										situpac = new DataInputStream(new FileInputStream("./situpac.txt"));
-
-										sw = 1;
-										while (sw != 0) {
-											try {
-												codp = situpac.readUTF();
-												codme = situpac.readUTF();
-												enfp = situpac.readUTF();
-
-												if (codtem.equals(codme)) // compara el codigo del medico
-																			// de la tabla "datomed"
-																			// con el codigo del medico en la
-																			// tabla "situpac"
-
-												{
-													ps(">>>> " + enfp + "\n");
-												}
-											} catch (EOFException e) {
-												sw = 0;
-											}
-										}
-									}
-								} catch (EOFException e) {
-									sw1 = 0;
-								}
-							}
+							enfXMed();
 							break;
 						}
 
@@ -287,52 +157,125 @@ class bdatoa {
 
 	}
 
-	private static void ingresoMedicos() throws FileNotFoundException, IOException {
+	private static void enfXMed() {
+		int sw;
+		int sw1;
+		String codm;
+		String codme;
+		String enfp;
+		String nomm;
+		String codtem;
+		ps("Digite el codigo del medico que desea consultar: ");
+		codtem = LeerCadena();
+
+		DataInputStream datomed = null;
+		try {
+			datomed = new DataInputStream(new FileInputStream("./datomed.txt"));
+
+			sw1 = 1;
+			while (sw1 != 0) {
+				try {
+					codm = datomed.readUTF();
+					nomm = datomed.readUTF();
+					if (codm.equals(codtem)) // compara el codigo digitado
+												// con el codigo del medico de la
+												// tabla "datomed"
+					{
+						ps("El medico " + nomm + " trata las siguientes enfermedades:" + "\n");
+	
+						DataInputStream situpac = null;
+						situpac = new DataInputStream(new FileInputStream("./situpac.txt"));
+	
+						sw = 1;
+						while (sw != 0) {
+							try {
+								codme = situpac.readUTF();
+								enfp = situpac.readUTF();
+	
+								if (codtem.equals(codme)) // compara el codigo del medico
+															// de la tabla "datomed"
+															// con el codigo del medico en la
+															// tabla "situpac"
+	
+								{
+									ps(">>>> " + enfp + "\n");
+								}
+							} catch (EOFException e) {
+								sw = 0;
+							}
+						}
+						
+						situpac.close();
+					}
+				} catch (EOFException e) {
+					sw1 = 0;
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+
+	private static void ingresoMedicos() {
 		String op;
 		String codmed;
 		String nommed;
 		String espmed;
-		DataOutputStream datomed = null;
-		datomed = new DataOutputStream(new FileOutputStream("./datomed.txt"));
+		PrintWriter datomed;
 		try {
+			datomed = new PrintWriter(new FileWriter("./datomed.txt", true));
+		
+			//DataOutputStream datomed = null;
+			//datomed = new DataOutputStream(new FileOutputStream("./datomed.txt"));
+			
 			do {
-
+	
 				ps("   ....................................................." + "\n");
 				ps("   :-:      - D A T O S   D E L   M E D I C O -      :-:" + "\n");
 				ps("   :-:...............................................:-:" + "\n");
-
+	
 				ps("Digite el codigo del medico: ");
 				codmed = LeerCadena();
-				datomed.writeUTF(codmed);
-
+				datomed.print(codmed + " ");
+	
 				ps("Digite el nombre del medico: ");
 				nommed = LeerCadena();
-				datomed.writeUTF(nommed);
-
+				datomed.print(nommed + " ");
+	
 				ps("Digite la especializacion del medico: ");
 				espmed = LeerCadena();
-				datomed.writeUTF(espmed);
-
+				datomed.print(espmed);
+				datomed.println(); //No se por que, el println(String) o un "\n" no pone el salto de linea
+	
 				ps("Desea ingresar otro medico? S/N");
 				ps("\n");
-
+	
 				op = LeerCadena();
-
+	
 			} while (op.equals("S") || op.equals("s"));
-		} catch (IOException ioe) {
+			
+			datomed.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		;
-		datomed.close();
 	}
 
-	private static String ingresoDiagnosticos(String codm) throws FileNotFoundException {
+	private static void ingresoDiagnosticos() {
 		String op;
 		String enfpac;
 		String codp;
-		DataOutputStream situpac = null;
-		situpac = new DataOutputStream(new FileOutputStream("./situpac.txt"));
-
+		String codm;
+		
+		PrintWriter situpac;
 		try {
+			situpac = new PrintWriter(new FileWriter("./situpac.txt", true));
+			
 			do {
 
 				ps("   ....................................................." + "\n");
@@ -341,34 +284,39 @@ class bdatoa {
 
 				ps("Digite el codigo del paciente: ");
 				codp = LeerCadena();
-				situpac.writeUTF(codp);
+				situpac.print(codp + " ");
 				ps("Digite el codigo del medico: ");
 				codm = LeerCadena();
-				situpac.writeUTF(codm);
+				situpac.print(codm + " ");
 				ps("Digite el diagnostico del medico: ");
 				enfpac = LeerCadena();
-				situpac.writeUTF(enfpac);
+				situpac.print(enfpac + " ");
+				situpac.println();
 
 				ps("Desea ingresar otro registro al historial? S/N");
 				ps("\n");
 				op = LeerCadena();
 
 			} while (op.equals("S") || op.equals("s"));
+			
 			situpac.close();
-		} catch (IOException ioe) {
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		;
-		return codm;
+
 	}
 
-	private static void ingresoPacientes() throws FileNotFoundException {
+	private static void ingresoPacientes() {
 		String op;
 		String codpac;
 		String nompac;
-		DataOutputStream datopac = null;
-		datopac = new DataOutputStream(new FileOutputStream("./datopac.txt"));
+		
+		PrintWriter datopac;
 		try {
-
+			datopac = new PrintWriter(new FileWriter("./datopac.txt", true));
+			
 			do {
 
 				ps("   ..............................................." + "\n");
@@ -377,21 +325,97 @@ class bdatoa {
 
 				ps("Digite el codigo del paciente: ");
 				codpac = LeerCadena();
-				datopac.writeUTF(codpac);
+				datopac.print(codpac + " ");
 				ps("Digite el nombre del paciente: ");
 				nompac = LeerCadena();
 
-				datopac.writeUTF(nompac);
+				datopac.print(nompac + " ");
+				datopac.println();
 
 				ps("Desea ingresar otro paciente? S/N" + "\n");
 
 				op = LeerCadena();
 
 			} while (op.equals("S") || op.equals("s"));
+			
 			datopac.close();
 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private static void listaPacXMed() {
+		String codtem, codm, nomm, codp, codme, codpa, nompa;
+		int sw, sw1;
+		try {
+
+			ps("Digite el codigo del medico que desea consultar: ");
+			codtem = LeerCadena();
+
+			DataInputStream datomed = null;
+			datomed = new DataInputStream(new FileInputStream("./datomed.txt"));
+
+			sw = 1;
+			while (sw != 0) {
+				try {
+					codm = datomed.readUTF();
+					nomm = datomed.readUTF();
+					if (codm.equals(codtem)) // compara el codigo extraido de la
+												// tabla "datomed" con el codigo
+												// digitado
+					{
+						ps("::: El medico " + nomm + " atiende a los siguientes pacientes: " + "\n");
+						DataInputStream situpac = null;
+						situpac = new DataInputStream(new FileInputStream("./situpac.txt"));
+		
+						sw = 1;
+						while (sw != 0) {
+							try {
+								codp = situpac.readUTF();
+								codme = situpac.readUTF();
+								if (codme.equals(codtem)) // compara el codigo medico de la
+															// tabla "datomed" con el de la
+															// tabla "situpac"
+								{
+									DataInputStream datopac = null;
+									datopac = new DataInputStream(
+											new FileInputStream("./datopac.txt"));
+		
+									sw1 = 1;
+									while (sw1 != 0) {
+										try {
+											codpa = datopac.readUTF();
+											nompa = datopac.readUTF();
+		
+											if (codpa.equals(codp)) // compara el codigo del
+																	// paciente de la tabla "situpac"
+																	// con el codigo del paciente de
+																	// la tabla "datopac"
+											{
+												ps("::: Paciente: " + nompa + "\n");
+											}
+										} catch (EOFException e) {
+											sw1 = 0;
+										}
+									}
+									datopac.close();
+								}
+							} catch (EOFException e) {
+								sw = 0;
+							}
+						}
+						situpac.close();
+					}
+				} catch (EOFException e) {
+					sw = 0;
+				}
+			}
+			datomed.close();
 		} catch (IOException ioe) {
 		}
 		;
 	}
+	
 }

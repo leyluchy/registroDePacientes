@@ -326,20 +326,19 @@ class bdatoa {
 			
 			do {
 
-				ps("   ..............................................." + "\n");
-				ps("   :-:  - D A T O S  D E L  P A C I E N T E -  :-:" + "\n");
-				ps("   :-:.........................................:-:" + "\n");
-
-				ps("Digite el codigo del paciente: ");
+				System.out.println("   ..............................................." + "\n" +
+						"   :-:  - D A T O S  D E L  P A C I E N T E -  :-:" + "\n" + 
+						"   :-:.........................................:-:" + "\n" + 
+						"Digite el codigo del paciente: ");
 				codpac = LeerCadena();
 				datopac.print(codpac + " ");
-				ps("Digite el nombre del paciente: ");
+				System.out.println("Digite el nombre del paciente: ");
 				nompac = LeerCadena();
 
 				datopac.print(nompac + " ");
 				datopac.println();
 
-				ps("Desea ingresar otro paciente? S/N" + "\n");
+				System.out.println("Desea ingresar otro paciente? S/N" + "\n");
 
 				op = LeerCadena();
 

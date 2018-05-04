@@ -4,7 +4,6 @@ import java.util.Scanner;
 class bdatoa {
 	public static void ps(String x) {
 		System.out.print(x);
-
 	}
 
 	public static int LeerEntero() {
@@ -37,13 +36,14 @@ class bdatoa {
 
 	public static void login() throws IOException {
 		String usuario, contraseña;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		while (true) {
 			try {
-				ps("Ingrese el usuario : ");
-				usuario = LeerCadena();
-				ps("ingrese la contraseña : ");
-				contraseña = LeerCadena();
+				System.out.println("Ingrese el usuario : ");
+				usuario = br.readLine();
+				System.out.println("ingrese la contraseña : ");
+				contraseña = br.readLine();
 				File f = new File("./login.in");
 				Scanner sc = new Scanner(f);
 
@@ -53,12 +53,13 @@ class bdatoa {
 					if (usuario.equals(user) && contraseña.equals(pass))
 						return;
 				}
+				sc.close();
 
 			} catch (FileNotFoundException e) {
 				System.out.println("El archivo no existe...");
 				System.exit(0);
 			}
-			ps("Error al ingresar usuario o contraseña\n");
+			System.out.println("Error al ingresar usuario o contraseña\n");
 
 		}
 	}
@@ -165,11 +166,14 @@ class bdatoa {
 		String enfp;
 		String nomm;
 		String codtem;
-		ps("Digite el codigo del medico que desea consultar: ");
-		codtem = LeerCadena();
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		DataInputStream datomed = null;
 		try {
+			System.out.println("Digite el codigo del medico que desea consultar: ");
+			codtem = br.readLine();
+			
 			datomed = new DataInputStream(new FileInputStream("./datomed.txt"));
 
 			sw1 = 1;
@@ -181,7 +185,7 @@ class bdatoa {
 												// con el codigo del medico de la
 												// tabla "datomed"
 					{
-						ps("El medico " + nomm + " trata las siguientes enfermedades:" + "\n");
+						System.out.println("El medico " + nomm + " trata las siguientes enfermedades:" + "\n");
 	
 						DataInputStream situpac = null;
 						situpac = new DataInputStream(new FileInputStream("./situpac.txt"));
@@ -198,7 +202,7 @@ class bdatoa {
 															// tabla "situpac"
 	
 								{
-									ps(">>>> " + enfp + "\n");
+									System.out.println(">>>> " + enfp + "\n");
 								}
 							} catch (EOFException e) {
 								sw = 0;
@@ -217,6 +221,9 @@ class bdatoa {
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
 	}
 
@@ -349,10 +356,11 @@ class bdatoa {
 	private static void listaPacXMed() {
 		String codtem, codm, nomm, codp, codme, codpa, nompa;
 		int sw, sw1;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try {
 
-			ps("Digite el codigo del medico que desea consultar: ");
-			codtem = LeerCadena();
+			System.out.println("Digite el codigo del medico que desea consultar: ");
+			codtem = br.readLine();
 
 			DataInputStream datomed = null;
 			datomed = new DataInputStream(new FileInputStream("./datomed.txt"));
@@ -366,7 +374,7 @@ class bdatoa {
 												// tabla "datomed" con el codigo
 												// digitado
 					{
-						ps("::: El medico " + nomm + " atiende a los siguientes pacientes: " + "\n");
+						System.out.println("::: El medico " + nomm + " atiende a los siguientes pacientes: " + "\n");
 						DataInputStream situpac = null;
 						situpac = new DataInputStream(new FileInputStream("./situpac.txt"));
 		
@@ -394,7 +402,7 @@ class bdatoa {
 																	// con el codigo del paciente de
 																	// la tabla "datopac"
 											{
-												ps("::: Paciente: " + nompa + "\n");
+												System.out.println("::: Paciente: " + nompa + "\n");
 											}
 										} catch (EOFException e) {
 											sw1 = 0;

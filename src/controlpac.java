@@ -72,8 +72,8 @@ class bdatoa {
 			op1 = 0;
 
 			ps("   .............................................." + "\n");
-			ps("   :-:        C E N T R O  M E D I C O        :-:" + "\n");
-			ps("   :-:   >>>> L O S  L A U R E L E S <<<<     :-:" + "\n");
+			ps("   :-:          C L Í NI C A   D E L          :-:" + "\n");
+			ps("   :-:    >>>> D R .   S T R A N G E <<<<     :-:" + "\n");
 			ps("   :-:  C O N T R O L  D E  P A C I E N T E S :-:" + "\n");
 			ps("   :-:........................................:-:" + "\n");
 			ps("   :-: 1.  Ingreso de datos                   :-:" + "\n");

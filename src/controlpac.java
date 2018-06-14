@@ -1,41 +1,25 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
-class bdatoa {
-	public static void ps(String x) {
-		System.out.print(x);
-	}
 
-	public static int LeerEntero() {
-		String línea = new String("");
-		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			línea = br.readLine();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		int ne = 0;
-		try {
-			ne = Integer.parseInt(línea);
-		} catch (Exception e) {
-		}
-		;
-		return (ne);
+class Controlpac {
+	
+	public Controlpac() throws IOException {
+		login();
+		procesar();
 	}
-
-	public static String LeerCadena() {
-		String línea = new String("");
-		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			línea = br.readLine();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (línea);
-	}
-
+	
 	public static void login() throws IOException {
-		String usuario, contraseña;
+		String usuario, contrasenia;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		while (true) {
@@ -43,14 +27,14 @@ class bdatoa {
 				System.out.println("Ingrese el usuario : ");
 				usuario = br.readLine();
 				System.out.println("ingrese la contraseña : ");
-				contraseña = br.readLine();
+				contrasenia = br.readLine();
 				File f = new File("./login.in");
 				Scanner sc = new Scanner(f);
 
 				while (sc.hasNextLine()) {
 					String user = sc.next();
 					String pass = sc.next();
-					if (usuario.equals(user) && contraseña.equals(pass))
+					if (usuario.equals(user) && contrasenia.equals(pass))
 						return;
 				}
 				sc.close();
@@ -63,14 +47,15 @@ class bdatoa {
 
 		}
 	}
-
-	public static void main(String args[]) throws Exception {
-		login();
-		int op1, op2; // variables de selección usadas en los diferentes menús
+	
+	/**
+	 * Muestra el menu principal y deriva el proceso segun la opcion elegida.
+	 * */
+	public void procesar() {
+		int opc; // variable de selección usada en el menu principal
 
 		do {
-			op1 = 0;
-
+			opc = 0;
 			ps("   .............................................." + "\n");
 			ps("   :-:          C L Í NI C A   D E L          :-:" + "\n");
 			ps("   :-:    >>>> D R .   S T R A N G E <<<<     :-:" + "\n");
@@ -81,83 +66,123 @@ class bdatoa {
 			ps("   :-: 3.  Salir                              :-:" + "\n");
 			ps("   .............................................." + "\n");
 			ps("   ....Elija la opcion deseada: ");
-			// ps("\n");
-			op1 = LeerEntero();
-			if (op1 < 1 || op1 > 3) {
+			
+			opc = LeerEntero();
+			if (opc < 1 || opc > 3) 
 				ps("Debe digitar una opcion del menu" + "\n");
-			}
+			else if (opc == 1) // selección ingreso de pacientes
+				procesarIngresoDeDatos();
+			else if (opc == 2)// seleción informes
+				procesarInformes();
+			
+		} while (opc != 3);
+	}
+	
+	/**
+	 * Se encarga del proceso de ingreso de datos.
+	 * */
+	public void procesarIngresoDeDatos() {
+		int opc;
+		
+		do {
 
-			if (op1 == 1) // seleción ingreso de pacientes
-			{
+			ps("   ..............................................." + "\n");
+			ps("   :-: -I N G R E S O  D E  P A C I E N T E S- :-:" + "\n");
+			ps("   :-:.........................................:-:" + "\n");
+			ps("   :-: 1.  Datos del paciente                  :-:" + "\n");
+			ps("   :-: 2.  Situacion del paciente              :-:" + "\n");
+			ps("   :-: 3.  Datos del medico                    :-:" + "\n");
+			ps("   :-: 4.  Anterior                            :-:" + "\n");
+			ps("   ..............................................." + "\n");
+			ps("   ....Elija la opcion deseada: ");
 
-				do {
+			opc = LeerEntero();
 
-					ps("   ..............................................." + "\n");
-					ps("   :-: -I N G R E S O  D E  P A C I E N T E S- :-:" + "\n");
-					ps("   :-:.........................................:-:" + "\n");
-					ps("   :-: 1.  Datos del paciente                  :-:" + "\n");
-					ps("   :-: 2.  Situacion del paciente              :-:" + "\n");
-					ps("   :-: 3.  Datos del medico                    :-:" + "\n");
-					ps("   :-: 4.  Anterior                            :-:" + "\n");
-					ps("   ..............................................." + "\n");
-					ps("   ....Elija la opcion deseada: ");
-
-					op2 = LeerEntero();
-
-					if (op2 < 1 || op2 > 4) {
-						ps("Debe digitar una opcion del menu" + "\n");
-					}
-
-					switch (op2) {
-					case 1: // ingreso de datos, datos del paciente
-						ingresoPacientes();
-						break;
-					// ingreso de datos, situacion del paciente
-					case 2:
-						ingresoDiagnosticos();
-						break;
-					case 3:
-						ingresoMedicos();
-					}
-				} while (op2 != 4);
-			} else {
-				if (op1 == 2) // seleción informes
-				{
-
-					do {
-						ps("   ..............................................." + "\n");
-						ps("   :-:  C O N T R O L  D E  P A C I E N T E S  :-:" + "\n");
-						ps("   ..............................................." + "\n");
-						ps("   :-:           - I N F O R M E S -           :-:" + "\n");
-						ps("   :-:.........................................:-:" + "\n");
-						ps("   :-: 1. Listado de pacientes por medico      :-:" + "\n");
-						ps("   :-: 2. Enfermedades que atiende cada medico :-:" + "\n");
-						ps("   :-: 3. Anterior                             :-:" + "\n");
-						ps("   ..............................................." + "\n");
-						ps("   ....Elija la opcion deseada: ");
-						op2 = LeerEntero();
-						if (op2 < 1 || op2 > 3) {
-							ps("Seleccione una de las opciones del menu" + "\n");
-						}
-
-						switch (op2) {
-						case 1:
-							listaPacXMed();
-							break;
-
-						case 2:
-							enfXMed();
-							break;
-						}
-
-					} while (op2 != 3);
-
+			if (opc < 1 || opc > 4)
+				ps("Debe digitar una opcion del menu" + "\n");
+			else if (opc != 4) {
+				switch (opc) {
+				case 1: // ingreso de datos, datos del paciente
+					ingresoPacientes();
+					break;
+				case 2:// ingreso de datos, situacion del paciente
+					ingresoDiagnosticos();
+					break;
+				case 3:// ingreso de datos, datos del medico
+					ingresoMedicos();
 				}
 			}
-		} while (op1 != 3);
 
+			
+		} while (opc != 4);
+	}
+	
+	/**
+	 * Se encarga del proceso de informes.
+	 * */
+	public void procesarInformes() { 
+		int opc;
+		do {
+			ps("   ..............................................." + "\n");
+			ps("   :-:  C O N T R O L  D E  P A C I E N T E S  :-:" + "\n");
+			ps("   ..............................................." + "\n");
+			ps("   :-:           - I N F O R M E S -           :-:" + "\n");
+			ps("   :-:.........................................:-:" + "\n");
+			ps("   :-: 1. Listado de pacientes por medico      :-:" + "\n");
+			ps("   :-: 2. Enfermedades que atiende cada medico :-:" + "\n");
+			ps("   :-: 3. Anterior                             :-:" + "\n");
+			ps("   ..............................................." + "\n");
+			ps("   ....Elija la opcion deseada: ");
+			
+			opc = LeerEntero();
+			if (opc < 1 || opc > 3) {
+				ps("Seleccione una de las opciones del menu" + "\n");
+			}
+
+			switch (opc) {
+			case 1:
+				listaPacXMed();
+				break;
+			case 2:
+				enfXMed();
+				break;
+			}
+
+		} while (opc != 3);
+	}
+	
+	public static void ps(String x) {
+		System.out.print(x);
 	}
 
+	public static int LeerEntero() {
+		String linea = new String("");
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			linea = br.readLine();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int ne = 0;
+		try {
+			ne = Integer.parseInt(linea);
+		} catch (Exception e) {
+		}
+		;
+		return (ne);
+	}
+
+	public static String LeerCadena() {
+		String linea = new String("");
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			linea = br.readLine();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (linea);
+	}
+	
 	private static void enfXMed() {
 		int sw;
 		int sw1;

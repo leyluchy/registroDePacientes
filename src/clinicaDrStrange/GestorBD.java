@@ -2,7 +2,6 @@ package clinicaDrStrange;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -93,7 +92,7 @@ public class GestorBD {
 	}
 	
 	
-	private static int lastLine(String file) {
+	public static int lastLine(String file) {
 		String actual=null,lastString=null;
 		int last=-1;
 		BufferedReader datomed = null;

@@ -4,6 +4,12 @@ public class Paciente {
 
 	private int codigoPaciente;
 	private String nombreYApellido;
+	
+	public Paciente(int cod, String nom) {
+		setCodigoPaciente(cod);
+		setNombreYApellido(nom);
+	}
+	
 	public int getCodigoPaciente() {
 		return codigoPaciente;
 	}

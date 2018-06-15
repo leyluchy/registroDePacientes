@@ -70,12 +70,12 @@ public class InterfazIngresoDatos {
 		do {
 			System.out.println(leyendaIngresoPac);
 			
-			System.out.println("Digite el codigo del paciente: ");
-			codpac = InterfazUsuario.leerEntero();
+			//System.out.println("Digite el codigo del paciente: ");
+			//codpac = InterfazUsuario.leerEntero();
 			System.out.println("Digite el nombre del paciente: ");
 			nompac = InterfazUsuario.leerCadena();
 			
-			if( !GestorIngresoDatos.ingresoDatosPaciente(codpac, nompac) )
+			if(nompac.isEmpty() || !GestorIngresoDatos.ingresoDatosPaciente(codpac, nompac) )
 				//Si no lo pudo guardar
 				System.out.println(errorGuardarEl + "paciente. " + vuelvaPronto);
 			
@@ -103,8 +103,9 @@ public class InterfazIngresoDatos {
 			System.out.println("Digite el diagnostico del medico: ");
 			enfpac = InterfazUsuario.leerCadena();
 			
-			if( !GestorIngresoDatos.ingresosituacionPaciente(codp, codm, enfpac) )
-				//Si no lo pudo guardar
+			if(codp == -1 || codm == -1 || enfpac.isEmpty() ||
+					!GestorIngresoDatos.ingresosituacionPaciente(codp, codm, enfpac) )
+				//Si se ingreso algo mal o no lo pudo guardar
 				System.out.println(errorGuardarEl + "diagnostico. " + vuelvaPronto);
 
 			System.out.println("¿Desea ingresar otro registro al historial? S/N" + "\n");
@@ -124,15 +125,16 @@ public class InterfazIngresoDatos {
 		do {
 			System.out.println(leyendaIngresoMed);
 
-			System.out.println("Digite el codigo del medico: ");
-			codmed = InterfazUsuario.leerEntero();
+			//System.out.println("Digite el codigo del medico: ");
+			//codmed = InterfazUsuario.leerEntero();
 			System.out.println("Digite el nombre del medico: ");
 			nommed = InterfazUsuario.leerCadena();
 			System.out.println("Digite la especializacion del medico: ");
 			espmed = InterfazUsuario.leerCadena();
 			
-			if( !GestorIngresoDatos.ingresoDatosMedico(codmed, nommed, espmed) )
-				//Si no lo pudo guardar
+			if(nommed.isEmpty() || espmed.isEmpty() ||
+					!GestorIngresoDatos.ingresoDatosMedico(codmed, nommed, espmed) )
+				//Si algo se ingreso mal o no lo pudo guardar
 				System.out.println(errorGuardarEl + "médico. " + vuelvaPronto);
 
 			System.out.println("¿Desea ingresar otro medico? S/N" + "\n");

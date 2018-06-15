@@ -63,11 +63,15 @@ public class InterfazConsultas {
 			System.out.println("Digite el codigo del medico que desea consultar: ");
 			codme = InterfazUsuario.leerEntero();
 			
-			Medico med = GestorInformes.traerMedico(codme);
-			if(med != null)
-				System.out.println("El medico " + med.getNombreYApellido() + " se especializa en " + med.getEspecializacion() + "\n");
+			if(codme != -1) {
+				Medico med = GestorInformes.traerMedico(codme);
+				if(med != null)
+					System.out.println("El medico " + med.getNombreYApellido() + " se especializa en " + med.getEspecializacion() + "\n");
+				else
+					System.out.println("No existe un médico con ese código");
+				}
 			else
-				System.out.println("No existe un médico con ese código");
+				System.out.println("Codigo inválido.");
 			
 			System.out.println("¿Desea consultar otro médico? S/N" + "\n");
 			op = InterfazUsuario.leerCadena();
@@ -87,27 +91,32 @@ public class InterfazConsultas {
 		do {
 			System.out.println("Digite el codigo del medico que desea consultar: ");
 			codme = InterfazUsuario.leerEntero();
-			
-			//Busco el medico en base al codigo ingresado
-			med = GestorInformes.traerMedico(codme);
-			if(med != null) {
+			if(codme != -1) {
 				
-				//Si existe el medico, busco los pacientes
-				listaPac = GestorInformes.traerListaDePacientesPorMedico(codme);
-				if(listaPac != null && listaPac.length > 0) {
+				//Busco el medico en base al codigo ingresado
+				med = GestorInformes.traerMedico(codme);
+				if(med != null) {
 					
-					//Si tiene pacientes, los listo
-					System.out.println("::: El medico " + med.getNombreYApellido() + " atiende a los siguientes pacientes: " + "\n");
-					for(Paciente pac : listaPac)
-						System.out.println("::: Paciente: " + pac.getNombreYApellido() + "\n");
+					//Si existe el medico, busco los pacientes
+					listaPac = GestorInformes.traerListaDePacientesPorMedico(codme);
+					if(listaPac != null && listaPac.length > 0) {
+						
+						//Si tiene pacientes, los listo
+						System.out.println("::: El medico " + med.getNombreYApellido() + " atiende a los siguientes pacientes: " + "\n");
+						for(Paciente pac : listaPac)
+							System.out.println("::: Paciente: " + pac.getNombreYApellido() + "\n");
+					}
+					else
+						//Si no tiene pacientes
+						System.out.println("::: El médico " + med.getNombreYApellido() + " no atiende a ningún paciente");
 				}
 				else
-					//Si no tiene pacientes
-					System.out.println("::: El médico " + med.getNombreYApellido() + " no atiende a ningún paciente");
+					//Si no existe el medico
+					System.out.println("::: No existe un médico con ese código");
 			}
 			else
-				//Si no existe el medico
-				System.out.println("::: No existe un médico con ese código");
+				//Si el codigo no es valido
+				System.out.println("Codigo inválido.");
 						
 			System.out.println("¿Desea consultar otro médico? S/N" + "\n");
 			op = InterfazUsuario.leerCadena();

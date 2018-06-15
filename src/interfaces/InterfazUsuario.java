@@ -37,7 +37,6 @@ public class InterfazUsuario {
 				new InterfazIngresoDatos().menuIngresoDeDatos();
 			else if (opc == 2)// seleción informes
 				new InterfazConsultas().menuInformes();
-			{}
 			
 		} while (opc != 3);
 	}

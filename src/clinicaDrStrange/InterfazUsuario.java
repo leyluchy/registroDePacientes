@@ -1,8 +1,10 @@
 package clinicaDrStrange;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 public class InterfazUsuario {
 	private String menuPrincipal =
@@ -27,6 +29,11 @@ public class InterfazUsuario {
 			"   :-: 4.  Anterior                            :-:" + "\n" +
 			"   ..............................................." + "\n" +
 			"   ....Elija la opcion deseada: ";
+	
+	private String leyendaIngresoPac = 
+			"   ..............................................." + "\n" +
+			"   :-:  - D A T O S  D E L  P A C I E N T E -  :-:" + "\n" + 
+			"   :-:.........................................:-:" + "\n";
 	
 	private String errorOpcionIncorrecta = "Debe digitar una opcion del menu" + "\n";
 	
@@ -94,5 +101,39 @@ public class InterfazUsuario {
 		} catch (IOException|NumberFormatException e) {
 			return -1;
 		}
+	}
+	
+	/**
+	 * Lee una string por consola. Si no la reconoce, la devuelve vacía.
+	 * @return
+	 */
+	public static String leerCadena() {
+		String linea = new String("");
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			linea = br.readLine();
+		} catch (Exception e) {
+			return "";
+		}
+		return (linea);
+	}
+	
+	private void ingresoPacientes() {
+		String op;
+		int codpac;
+		String nompac;
+		do {
+			System.out.println(leyendaIngresoPac);
+			
+			System.out.println("Digite el codigo del paciente: ");
+			codpac = leerEntero();
+			System.out.println("Digite el nombre del paciente: ");
+			nompac = leerCadena();
+			
+			GestorIngresoDatos.ingresoDatosPaciente(codpac, nompac);
+			
+			System.out.println("Desea ingresar otro paciente? S/N" + "\n");
+			op = leerCadena();
+		} while (op.equals("S") || op.equals("s"));
 	}
 }

@@ -30,6 +30,9 @@ public class InterfazIngresoDatos {
 			"   :-:      - D A T O S   D E L   M E D I C O -      :-:" + "\n" +
 			"   :-:...............................................:-:" + "\n";
 	
+	private final String errorGuardarEl = "Ha ocurrido un error al guardar el ";
+	private final String vuelvaPronto = "Inténtelo más tarde.";
+	
 	/**
 	 * Se encarga del proceso de ingreso de datos.
 	 * */
@@ -53,7 +56,6 @@ public class InterfazIngresoDatos {
 					ingresoMedicos();
 				}
 			}
-
 			
 		} while (opc != 4);
 	}
@@ -73,9 +75,11 @@ public class InterfazIngresoDatos {
 			System.out.println("Digite el nombre del paciente: ");
 			nompac = InterfazUsuario.leerCadena();
 			
-			GestorIngresoDatos.ingresoDatosPaciente(codpac, nompac);
+			if( !GestorIngresoDatos.ingresoDatosPaciente(codpac, nompac) )
+				//Si no lo pudo guardar
+				System.out.println(errorGuardarEl + "paciente. " + vuelvaPronto);
 			
-			System.out.println("Desea ingresar otro paciente? S/N" + "\n");
+			System.out.println("¿Desea ingresar otro paciente? S/N" + "\n");
 			op = InterfazUsuario.leerCadena();
 		} while (op.equals("S") || op.equals("s"));
 	}
@@ -99,9 +103,11 @@ public class InterfazIngresoDatos {
 			System.out.println("Digite el diagnostico del medico: ");
 			enfpac = InterfazUsuario.leerCadena();
 			
-			GestorIngresoDatos.ingresosituacionPaciente(codp, codm, enfpac);
+			if( !GestorIngresoDatos.ingresosituacionPaciente(codp, codm, enfpac) )
+				//Si no lo pudo guardar
+				System.out.println(errorGuardarEl + "diagnostico. " + vuelvaPronto);
 
-			System.out.println("Desea ingresar otro registro al historial? S/N" + "\n");
+			System.out.println("¿Desea ingresar otro registro al historial? S/N" + "\n");
 			op = InterfazUsuario.leerCadena();
 		} while (op.equals("S") || op.equals("s"));
 	}
@@ -125,9 +131,11 @@ public class InterfazIngresoDatos {
 			System.out.println("Digite la especializacion del medico: ");
 			espmed = InterfazUsuario.leerCadena();
 			
-			GestorIngresoDatos.ingresoDatosMedico(codmed, nommed, espmed);
+			if( !GestorIngresoDatos.ingresoDatosMedico(codmed, nommed, espmed) )
+				//Si no lo pudo guardar
+				System.out.println(errorGuardarEl + "médico. " + vuelvaPronto);
 
-			System.out.println("Desea ingresar otro medico? S/N" + "\n");
+			System.out.println("¿Desea ingresar otro medico? S/N" + "\n");
 			op = InterfazUsuario.leerCadena();
 		} while (op.equals("S") || op.equals("s"));
 	}

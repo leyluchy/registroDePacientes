@@ -36,7 +36,7 @@ public class InterfazUsuario {
 			else if (opc == 1) // selección ingreso de pacientes
 				new InterfazIngresoDatos().menuIngresoDeDatos();
 			else if (opc == 2)// seleción informes
-				//procesarInformes();
+				new InterfazConsultas().menuInformes();
 			{}
 			
 		} while (opc != 3);

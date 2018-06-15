@@ -1,13 +1,5 @@
 package interfaces;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import clinicaDrStrange.GestorInformes;
 import clinicaDrStrange.Medico;
 import clinicaDrStrange.Paciente;
@@ -64,30 +56,61 @@ public class InterfazConsultas {
 	 */
 	private void enfXMed() {
 		int codme;
+		String op;
 		
 		System.out.println(leyendaEnfXMed);
-		System.out.println("Digite el codigo del medico que desea consultar: ");
-		codme = InterfazUsuario.leerEntero();
-		
-		Medico med = GestorInformes.traerMedico(codme);
-		System.out.println("El medico " + med.getNombreYApellido() + " se especializa en " + med.getEspecializacion() + "\n");
+		do {
+			System.out.println("Digite el codigo del medico que desea consultar: ");
+			codme = InterfazUsuario.leerEntero();
+			
+			Medico med = GestorInformes.traerMedico(codme);
+			if(med != null)
+				System.out.println("El medico " + med.getNombreYApellido() + " se especializa en " + med.getEspecializacion() + "\n");
+			else
+				System.out.println("No existe un médico con ese código");
+			
+			System.out.println("¿Desea consultar otro médico? S/N" + "\n");
+			op = InterfazUsuario.leerCadena();
+		} while (op.equals("S") || op.equals("s"));
 	}
 	
 	/**
 	 * Pantalla para listar los pacientes de un medico
 	 */
-	private static void listaPacXMed() {
+	private void listaPacXMed() {
 		int codme;
+		String op;
 		Medico med;
 		Paciente[] listaPac;
 		
-		System.out.println("Digite el codigo del medico que desea consultar: ");
-		codme = InterfazUsuario.leerEntero();
-		med = GestorInformes.traerMedico(codme);
-		listaPac = GestorInformes.traerListaDePacientesPorMedico(codme);
-		
-		System.out.println("::: El medico " + med.getNombreYApellido() + " atiende a los siguientes pacientes: " + "\n");
-		for(Paciente pac : listaPac)
-			System.out.println("::: Paciente: " + pac.getNombreYApellido() + "\n");
+		System.out.println(leyendaPacXMed);
+		do {
+			System.out.println("Digite el codigo del medico que desea consultar: ");
+			codme = InterfazUsuario.leerEntero();
+			
+			//Busco el medico en base al codigo ingresado
+			med = GestorInformes.traerMedico(codme);
+			if(med != null) {
+				
+				//Si existe el medico, busco los pacientes
+				listaPac = GestorInformes.traerListaDePacientesPorMedico(codme);
+				if(listaPac != null && listaPac.length > 0) {
+					
+					//Si tiene pacientes, los listo
+					System.out.println("::: El medico " + med.getNombreYApellido() + " atiende a los siguientes pacientes: " + "\n");
+					for(Paciente pac : listaPac)
+						System.out.println("::: Paciente: " + pac.getNombreYApellido() + "\n");
+				}
+				else
+					//Si no tiene pacientes
+					System.out.println("::: El médico " + med.getNombreYApellido() + " no atiende a ningún paciente");
+			}
+			else
+				//Si no existe el medico
+				System.out.println("::: No existe un médico con ese código");
+						
+			System.out.println("¿Desea consultar otro médico? S/N" + "\n");
+			op = InterfazUsuario.leerCadena();
+		} while (op.equals("S") || op.equals("s"));
 	}
 }

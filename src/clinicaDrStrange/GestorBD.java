@@ -107,6 +107,6 @@ public class GestorBD {
 		} catch (IOException e) {
 			return null;
 		}
-		return last;
+		return new Integer(last);
 	}
 }

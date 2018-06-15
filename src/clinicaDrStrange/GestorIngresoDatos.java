@@ -2,15 +2,15 @@ package clinicaDrStrange;
 
 public class GestorIngresoDatos {
 
-	public boolean IngresoDatosPaciente(){
+	public boolean IngresoDatosPaciente(int codPac, String nyAp){
 		return true;
 	}
 	
-	public boolean IngresosituacionPaciente() {
+	public boolean IngresosituacionPaciente(int codPac, int codMed, String diag) {
 		return true;
 	}
 	
-	public boolean IngresoDatosMedico() {
+	public boolean IngresoDatosMedico(int codMed, String nyAp, String spe) {
 		return true;
 	}
 }

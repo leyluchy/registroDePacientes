@@ -4,6 +4,14 @@ public class Medico {
 
 	private int codigoMedico;
 	private String nombreYApellido;
+	private String especializacion;
+	
+	public Medico(int codMed, String nyap, String esp) {
+		this.codigoMedico=codMed;
+		this.nombreYApellido=nyap;
+		this.especializacion=esp;
+	}
+	
 	public int getCodigoMedico() {
 		return codigoMedico;
 	}
@@ -22,5 +30,5 @@ public class Medico {
 	public void setEspecializacion(String especializacion) {
 		this.especializacion = especializacion;
 	}
-	private String especializacion;
+	
 }

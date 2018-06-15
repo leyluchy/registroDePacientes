@@ -29,4 +29,17 @@ public class GestorBD {
 		}
 		return true;
 	}
+	
+	public static boolean ingresarMedico(int codMed, String nyap, String esp) {
+		PrintWriter datomed;
+		try {
+			datomed = new PrintWriter(new FileWriter("./datomed.txt", true));
+			datomed.println(codMed+"|"+nyap+"|"+esp);
+			datomed.close();
+		} catch (IOException e) {
+			return false;
+		}
+		return true;
+	}
+	
 }

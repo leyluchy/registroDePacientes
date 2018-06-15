@@ -6,7 +6,7 @@ public class GestorInformes {
 		return null;
 	}
 	
-	public static Medico traerEspecialidad(int codMed) {
+	public static Medico traerMedico(int codMed) {
 		return null;
 	}
 }

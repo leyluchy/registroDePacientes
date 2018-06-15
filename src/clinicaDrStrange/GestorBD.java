@@ -18,5 +18,15 @@ public class GestorBD {
 		return true;
 	}
 	
-	//public static boolean ingresarDiagnostico()
+	public static boolean ingresarDiagnostico(int codPac,int codMed, int diag) {
+		PrintWriter situpac;
+		try {
+			situpac = new PrintWriter(new FileWriter("./situpac.txt", true));
+			situpac.println(codPac+"|"+codMed+"|"+diag);
+			situpac.close();
+		} catch (IOException e) {
+			return false;
+		}
+		return true;
+	}
 }

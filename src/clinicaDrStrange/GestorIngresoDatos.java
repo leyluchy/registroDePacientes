@@ -14,7 +14,7 @@ public class GestorIngresoDatos {
 		if(ultimo==null)
 			return null;
 		Medico med = new Medico(ultimo+1, nommed, espmed);
-		return ultimo+1;
+		return new Integer(ultimo+1);
 	}
 
 	/**
@@ -40,6 +40,6 @@ public class GestorIngresoDatos {
 		if(ultimo==null)
 			return null;
 		Paciente pac = new Paciente(ultimo+1, nompac);
-		return ultimo+1;
+		return new Integer(ultimo+1);
 	}
 }

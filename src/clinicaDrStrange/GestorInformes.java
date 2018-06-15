@@ -2,11 +2,11 @@ package clinicaDrStrange;
 
 public class GestorInformes {
 
-	public static boolean traerListaDePacientesPorMedico(int codMed, String nomMed, String[] pacientes) {
-		return true;
+	public static Paciente[] traerListaDePacientesPorMedico(int codMed) {
+		return null;
 	}
 	
-	public static boolean traerEspecialidad(int codMed, String nomMed, String spe) {
-		return true;
+	public static Medico traerEspecialidad(int codMed) {
+		return null;
 	}
 }

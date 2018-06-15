@@ -42,4 +42,7 @@ public class GestorBD {
 		return true;
 	}
 	
+	/*public static boolean consultarEspecialidad(int codMed, String spe) {
+		
+	}*/
 }

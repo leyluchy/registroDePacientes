@@ -66,12 +66,19 @@ public class GestorBD {
 		return true;
 	}
 	
-	public static Medico consultarMedico(int codMed, String spe) {
+	public static Medico consultarMedico(int codMed) {
 		BufferedReader datomed = null;
 		Medico medico=null;
+		String[] line;
+		boolean continuar=true;
 		try {
 			datomed = new BufferedReader(new FileReader("./datomed.txt"));
-			datomed.readLine();
+			while(continuar) {
+				line=datomed.readLine().split("|");
+				if(Integer.parseInt(line[0])==codMed) {
+					medico=new Medico(Integer.parseInt(line[0]),line[1],line[2]);
+				}
+			}
 			
 		} catch (IOException e) {
 			return null;

@@ -1,3 +1,4 @@
+package clinicaDrStrange;
 import java.awt.EventQueue;
 
 public class Principal {

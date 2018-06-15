@@ -2,14 +2,9 @@ package clinicaDrStrange;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 
 public class GestorBD {
 
@@ -70,19 +65,25 @@ public class GestorBD {
 		BufferedReader datomed = null;
 		Medico medico=null;
 		String[] line;
+		String aux;
 		boolean continuar=true;
 		try {
 			datomed = new BufferedReader(new FileReader("./datomed.txt"));
-			while(continuar) {
-				line=datomed.readLine().split("|");
+			while(continuar && (aux=datomed.readLine())!=null) {
+				line=aux.split("|");
 				if(Integer.parseInt(line[0])==codMed) {
 					medico=new Medico(Integer.parseInt(line[0]),line[1],line[2]);
+					continuar=false;
 				}
+			datomed.close();
 			}
 			
 		} catch (IOException e) {
 			return null;
 		}
+		try {
+			datomed.close();
+		} catch (IOException e) {}
 		return medico;
 	}
 }

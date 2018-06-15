@@ -92,7 +92,7 @@ public class GestorBD {
 	}
 	
 	
-	public static int lastLine(String file) {
+	public static Integer lastLine(String file) {
 		String actual=null,lastString=null;
 		int last=-1;
 		BufferedReader datomed = null;
@@ -100,12 +100,13 @@ public class GestorBD {
 			datomed = new BufferedReader(new FileReader(file));
 			while((actual=datomed.readLine())!=null) {
 				lastString=actual;
-				
+				if(lastString!=null)
+					last=Integer.parseInt(lastString.split("|")[0]);
+				datomed.close();
 			}
-			if(lastString!=null)
-				last=Integer.parseInt(lastString.split("|")[0]);
-			datomed.close();
-		} catch (IOException e) {}
+		} catch (IOException e) {
+			return null;
+		}
 		return last;
 	}
 }

@@ -22,7 +22,7 @@ public class GestorBD {
 		BufferedWriter datopac;
 		try {
 			datopac = new BufferedWriter(new FileWriter("./datopac.txt", true));
-			datopac.write(paciente.getCodigoPaciente()+"|"+paciente.getNombreYAprellido());
+			datopac.write(paciente.getCodigoPaciente()+"|"+paciente.getNombreYApellido());
 			datopac.newLine();
 			datopac.close();
 		} catch (IOException e) {

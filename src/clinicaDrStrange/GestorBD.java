@@ -91,6 +91,7 @@ public class GestorBD {
 		return medico;
 	}
 	
+	//Falta traer pacientes por medico
 	
 	public static Integer lastLine(String file) {
 		String actual=null,lastString=null;

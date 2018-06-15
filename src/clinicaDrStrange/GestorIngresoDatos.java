@@ -14,6 +14,7 @@ public class GestorIngresoDatos {
 		if(ultimo==null)
 			return null;
 		Medico med = new Medico(ultimo+1, nommed, espmed);
+		
 		return new Integer(ultimo+1);
 	}
 

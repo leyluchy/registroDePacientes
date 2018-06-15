@@ -1,5 +1,5 @@
 package clinicaDrStrange;
-
+//hacer
 public class GestorInformes {
 
 	public static Paciente[] traerListaDePacientesPorMedico(int codMed) {

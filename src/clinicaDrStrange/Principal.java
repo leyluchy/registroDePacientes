@@ -1,17 +1,9 @@
 package clinicaDrStrange;
-import java.awt.EventQueue;
+
+import interfaces.InterfazUsuario;
 
 public class Principal {
-	public static void main(String args[]) throws Exception {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new Controlpac();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
+	public static void main(String args[]) {
+		new InterfazUsuario().menuPrincipal();
 	}
 }

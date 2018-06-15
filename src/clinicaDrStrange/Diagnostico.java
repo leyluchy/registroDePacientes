@@ -5,6 +5,13 @@ public class Diagnostico {
 	private int codigoPaciente;
 	private int codigoMedico;
 	private String diagnostico;
+	
+	public Diagnostico(int codPaciente, int codMedico, String diagnostico) {
+		setCodigoPaciente(codPaciente);
+		setCodigoMedico(codMedico);
+		setDiagnostico(diagnostico);
+	}
+	
 	public int getCodigoPaciente() {
 		return codigoPaciente;
 	}

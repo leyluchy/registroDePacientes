@@ -75,7 +75,7 @@ public class InterfazIngresoDatos {
 			System.out.println("Digite el nombre del paciente: ");
 			nompac = InterfazUsuario.leerCadena();
 			
-			if(!nompac.isEmpty() && codpac = GestorIngresoDatos.ingresoDatosPaciente(nompac) != null)
+			if(!nompac.isEmpty() && (codpac = GestorIngresoDatos.ingresoDatosPaciente(nompac)) != null)
 				System.out.println("El paciente se guardó con el código " + codpac);
 			else
 				//Si no lo pudo guardar
@@ -135,7 +135,7 @@ public class InterfazIngresoDatos {
 			espmed = InterfazUsuario.leerCadena();
 			
 			if(!nommed.isEmpty() && !espmed.isEmpty() &&
-					codmed = GestorIngresoDatos.ingresoDatosMedico(nommed, espmed) != null)
+					(codmed = GestorIngresoDatos.ingresoDatosMedico(nommed, espmed)) != null)
 				System.out.println("El médico se guardó con el código " + codmed);
 				//Si algo se ingreso mal o no lo pudo guardar
 				System.out.println(errorGuardarEl + "médico. " + vuelvaPronto);

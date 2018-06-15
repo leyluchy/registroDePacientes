@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import clinicaDrStrange.GestorInformes;
+import clinicaDrStrange.Medico;
+import clinicaDrStrange.Paciente;
 
 public class InterfazConsultas {
 	
@@ -28,15 +30,20 @@ public class InterfazConsultas {
 			"   ....................................................." + "\n" +
 			"   :-:          - E S P E C I A L I D A D -          :-:" + "\n" +
 			"   :-:...............................................:-:" + "\n";
+	private final String leyendaPacXMed =
+			"   ....................................................." + "\n" +
+			"   :-:        - L I S T A   P A C I E N T E S -         " + "\n" +
+			"   :-:            - P O R   M E D I C O -            :-:" + "\n" +
+			"   :-:...............................................:-:" + "\n";
 	
 	/**
 	 * Se encarga del proceso de informes.
 	 * */
 	public void menuInformes() { 
 		int opc;
+		System.out.println(menuInformes);
 		
 		do {
-			System.out.println(menuInformes);
 			opc = InterfazUsuario.leerEntero();
 			
 			if (opc < 1 || opc > 3)
@@ -56,55 +63,31 @@ public class InterfazConsultas {
 	 * Pantalla para consultar las enfermedades que atiende cada medico
 	 */
 	private void enfXMed() {
-		int sw;
-		int sw1;
-		String enfp;
-		String nomm;
 		int codme;
 		
-		try {
-			System.out.println(leyendaEnfXMed);
-			System.out.println("Digite el codigo del medico que desea consultar: ");
-			codme = InterfazUsuario.leerEntero();
-
-			sw1 = 1;
-			while (sw1 != 0) {
-				GestorInformes.
-				System.out.println("El medico " + nomm + " trata las siguientes enfermedades:" + "\n");
-						sw = 1;
-						while (sw != 0) {
-							try {
-								codme = situpac.readUTF();
-								enfp = situpac.readUTF();
+		System.out.println(leyendaEnfXMed);
+		System.out.println("Digite el codigo del medico que desea consultar: ");
+		codme = InterfazUsuario.leerEntero();
+		
+		Medico med = GestorInformes.traerMedico(codme);
+		System.out.println("El medico " + med.getNombreYApellido() + " se especializa en " + med.getEspecializacion() + "\n");
+	}
 	
-								if (codme.equals(codme)) // compara el codigo del medico
-															// de la tabla "datomed"
-															// con el codigo del medico en la
-															// tabla "situpac"
-	
-								{
-									System.out.println(">>>> " + enfp + "\n");
-								}
-							} catch (EOFException e) {
-								sw = 0;
-							}
-						}
-						
-						situpac.close();
-					}
-				} catch (EOFException e) {
-					sw1 = 0;
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+	/**
+	 * Pantalla para listar los pacientes de un medico
+	 */
+	private static void listaPacXMed() {
+		int codme;
+		Medico med;
+		Paciente[] listaPac;
+		
+		System.out.println("Digite el codigo del medico que desea consultar: ");
+		codme = InterfazUsuario.leerEntero();
+		med = GestorInformes.traerMedico(codme);
+		listaPac = GestorInformes.traerListaDePacientesPorMedico(codme);
+		
+		System.out.println("::: El medico " + med.getNombreYApellido() + " atiende a los siguientes pacientes: " + "\n");
+		for(Paciente pac : listaPac)
+			System.out.println("::: Paciente: " + pac.getNombreYApellido() + "\n");
 	}
 }

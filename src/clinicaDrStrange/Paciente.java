@@ -3,18 +3,18 @@ package clinicaDrStrange;
 public class Paciente {
 
 	private int codigoPaciente;
-	private String nombreYAprellido;
+	private String nombreYApellido;
 	public int getCodigoPaciente() {
 		return codigoPaciente;
 	}
 	public void setCodigoPaciente(int codigoPaciente) {
 		this.codigoPaciente = codigoPaciente;
 	}
-	public String getNombreYAprellido() {
-		return nombreYAprellido;
+	public String getNombreYApellido() {
+		return nombreYApellido;
 	}
-	public void setNombreYAprellido(String nombreYAprellido) {
-		this.nombreYAprellido = nombreYAprellido;
+	public void setNombreYApellido(String nombreYAprellido) {
+		this.nombreYApellido = nombreYAprellido;
 	}
 	
 	

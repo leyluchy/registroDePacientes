@@ -32,7 +32,11 @@ public class GestorBD {
 		} catch (IOException e) {}
 		return true;
 	}
-	
+	/**
+	 * Permite ingresar diagnosticos en la BD
+	 * @param diagnostico el diagnostico ingresado
+	 * @return true si logró ingresar con exito, false en caso contrario
+	 */
 	public static boolean ingresarDiagnostico(Diagnostico diagnostico) {
 		BufferedWriter situpac;
 		try {
@@ -49,6 +53,11 @@ public class GestorBD {
 		return true;
 	}
 	
+	/**
+	 * Permite ingresar medicos en la BD
+	 * @param medico el medico ingresado
+	 * @return true si logró ingresar con exito, false en caso contrario
+	 */
 	public static boolean ingresarMedico(Medico medico) {
 		BufferedWriter datomed;
 		try {
@@ -65,6 +74,11 @@ public class GestorBD {
 		return true;
 	}
 	
+	/**
+	 * La consulta de un medico, se usa para consultar su especialdiad
+	 * @param codMed codigo del medico pedido
+	 * @return el objeto Medico buscado
+	 */
 	public static Medico consultarMedico(int codMed) {
 		BufferedReader datomed = null;
 		Medico medico=null;
@@ -93,6 +107,12 @@ public class GestorBD {
 	
 	//Falta traer pacientes por medico
 	
+	/**
+	 * Trae el ultimo codigo de la ultima linea de un archivo de medicos o pacientes
+	 * @param file el archivo a buscar
+	 * @return 	el numero del ultimo codigo, coincidente con la fila analizada, -1 si no se hallaron codigos,
+	 *			null si no se puede acceder al archivo
+	 */
 	public static Integer lastLine(String file) {
 		String actual=null,lastString=null;
 		int last=-1;

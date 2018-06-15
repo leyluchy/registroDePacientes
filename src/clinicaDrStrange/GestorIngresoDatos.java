@@ -14,7 +14,7 @@ public class GestorIngresoDatos {
 		if(ultimo==null)
 			return null;
 		Medico med = new Medico(ultimo+1, nommed, espmed);
-		
+		GestorBD.ingresarMedico(med);
 		return new Integer(ultimo+1);
 	}
 
@@ -27,6 +27,7 @@ public class GestorIngresoDatos {
 	 */
 	public static boolean ingresosituacionPaciente(int codp, int codm, String enfpac) {
 		Diagnostico diag = new Diagnostico(codp, codm, enfpac);
+		GestorBD.ingresarDiagnostico(diag);
 		return false;
 	}
 
@@ -41,6 +42,7 @@ public class GestorIngresoDatos {
 		if(ultimo==null)
 			return null;
 		Paciente pac = new Paciente(ultimo+1, nompac);
+		GestorBD.ingresarPaciente(pac);
 		return new Integer(ultimo+1);
 	}
 }

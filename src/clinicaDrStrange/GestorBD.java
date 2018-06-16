@@ -154,14 +154,14 @@ public class GestorBD {
 		String linea;
 		ArrayList<Diagnostico> diag =new ArrayList<Diagnostico>();
 		try {
-			BufferedReader datomed= new BufferedReader(new FileReader(DATOS_MEDICOS_FILE));
-			while((linea=datomed.readLine()) != null) {
+			BufferedReader datodiag= new BufferedReader(new FileReader(DATOS_DIAGNOSTICO_FILE));
+			while((linea=datodiag.readLine()) != null) {
 				String[] lineaPartida = linea.split("\\|");
 				if(codMedico==Integer.parseInt(lineaPartida[1])) {
 					diag.add(new Diagnostico(Integer.parseInt(lineaPartida[0]),Integer.parseInt(lineaPartida[1]),lineaPartida[2]));
 				}
 			}
-			datomed.close();
+			datodiag.close();
 		}catch (IOException e) {}
 		return diag;
 	}

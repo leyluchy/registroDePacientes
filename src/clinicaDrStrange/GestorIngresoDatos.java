@@ -4,6 +4,7 @@ public class GestorIngresoDatos {
 
 	/**
 	 * Ingresa un medico, y devuelve la posición del mismo
+	 * O(medicos)
 	 * @param codmed
 	 * @param nommed
 	 * @param espmed
@@ -20,6 +21,7 @@ public class GestorIngresoDatos {
 
 	/**
 	 * Ingresa una situación de paciente, y devuelve true
+	 * O(1)
 	 * @param codp
 	 * @param codm
 	 * @param enfpac
@@ -32,6 +34,7 @@ public class GestorIngresoDatos {
 
 	/**
 	 * Ingresa un paciente y devuelve la posicion del mismo
+	 * O(pacientes)
 	 * @param codpac
 	 * @param nompac
 	 * @return codigo de Paciente si salió bien, null si hay error de archivo

@@ -9,6 +9,8 @@ public class Paciente {
 	 * Un paciente es una persona que se atiende en esta clínica.
 	 * Se lo identifica a partir de un código único, y se guarda
 	 * su nombre y apellido en una misma string.
+	 * 
+	 * O(1)
 	 * @param cod
 	 * @param nom
 	 */
@@ -19,6 +21,7 @@ public class Paciente {
 	
 	/**
 	 * Devuelve el código único del paciente.
+	 * O(1)
 	 * @return
 	 */
 	public int getCodigoPaciente() {
@@ -30,6 +33,7 @@ public class Paciente {
 	
 	/**
 	 * Devuelve el nombre y apellido en una string.
+	 * O(1)
 	 * @return
 	 */
 	public String getNombreYApellido() {

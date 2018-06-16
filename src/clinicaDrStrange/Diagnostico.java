@@ -15,6 +15,8 @@ public class Diagnostico {
 	 * Un diagnóstico se crea a partir del código del paciente diagnosticado,
 	 * el código del médico que diagnostica y un texto con el diagnóstico en
 	 * sí.
+	 * 
+	 * O(1)
 	 * @param codPaciente
 	 * @param codMedico
 	 * @param diagnostico
@@ -27,6 +29,8 @@ public class Diagnostico {
 	
 	/**
 	 * Devuelve el código de paciente diagnosticado
+	 * 
+	 * O(1)
 	 * @return
 	 */
 	public int getCodigoPaciente() {
@@ -38,6 +42,8 @@ public class Diagnostico {
 	
 	/**
 	 * Devuelve el código del médico que escribió el diagnóstico
+	 * 
+	 * O(1)
 	 * @return
 	 */
 	public int getCodigoMedico() {
@@ -49,6 +55,8 @@ public class Diagnostico {
 	
 	/**
 	 * Devuelve un texto con el diagnóstico
+	 * 
+	 * O(1)
 	 * @return
 	 */
 	public String getDiagnostico() {

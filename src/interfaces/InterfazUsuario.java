@@ -41,6 +41,7 @@ public class InterfazUsuario {
 		
 	/**
 	 * Lee un entero por consola. Si no logra reconocer un entero, devuelve -1
+	 * O(1)
 	 * @return
 	 */
 	static int leerEntero() {
@@ -57,6 +58,7 @@ public class InterfazUsuario {
 	
 	/**
 	 * Lee una string por consola. Si no la reconoce, la devuelve vacía.
+	 * O(1)
 	 * @return
 	 */
 	static String leerCadena() {

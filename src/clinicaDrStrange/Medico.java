@@ -9,6 +9,8 @@ public class Medico {
 	/**
 	 * Un médico tiene un código único, un nombre y apellido
 	 * y una especialidad.
+	 * 
+	 * O(1)
 	 * @param codMed
 	 * @param nyap
 	 * @param esp
@@ -21,6 +23,8 @@ public class Medico {
 	
 	/**
 	 * Devuelve el código del médico
+	 * 
+	 * O(1)
 	 * @return
 	 */
 	public int getCodigoMedico() {
@@ -32,6 +36,8 @@ public class Medico {
 	
 	/**
 	 * Devuelve una string con nombre y apellido
+	 * 
+	 * O(1)
 	 * @return
 	 */
 	public String getNombreYApellido() {
@@ -43,6 +49,8 @@ public class Medico {
 	
 	/**
 	 * Devuelve una string con la especialidad
+	 * 
+	 * O(1)
 	 * @return
 	 */
 	public String getEspecializacion() {

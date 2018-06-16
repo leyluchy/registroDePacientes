@@ -16,6 +16,7 @@ public class GestorBD {
 	
 	/**
 	 * Permite ingresar pacientes en la BD
+	 * O(1)
 	 * @param paciente El paciente ingresado
 	 * @return true si logr� ingresar con exito, false en caso contrario
 	 */
@@ -37,6 +38,8 @@ public class GestorBD {
 	
 	/**
 	 * Permite ingresar diagnosticos en la BD
+	 * 
+	 * O(1)
 	 * @param diagnostico el diagnostico ingresado
 	 * @return true si logr� ingresar con exito, false en caso contrario
 	 */
@@ -58,6 +61,7 @@ public class GestorBD {
 	
 	/**
 	 * Permite ingresar medicos en la BD
+	 * O(1)
 	 * @param medico el medico ingresado
 	 * @return true si logr� ingresar con exito, false en caso contrario
 	 */
@@ -77,11 +81,11 @@ public class GestorBD {
 		return true;
 	}
 	
-	//Falta traer pacientes por medico
 	/**
 	 * A partir del codigo de un medico busca entre los diagnosticos. Por cada diagnostico
 	 * que escribio ese medico, busca el paciente en la BD de pacientes y con ellos arma
 	 * una lista de pacientes.
+	 * O(cantDiagnosticos*cantPacientes)
 	 * @param codMed
 	 * @return
 	 */
@@ -108,6 +112,7 @@ public class GestorBD {
 	/**
 	 * Busca un paciente en la BD a traves del codigo pasado como string.
 	 * Si no lo encuentra u ocurre una excepci�n, devuelve null.
+	 * O(n) n=cant pacientes.
 	 * @param codPaciente
 	 * @return
 	 */
@@ -130,6 +135,7 @@ public class GestorBD {
 	
 	/**
 	 * La consulta de un medico, se usa para consultar su especialdiad
+	 * O(cantMedicos)
 	 * @param codMed codigo del medico pedido
 	 * @return el objeto Medico buscado
 	 */
@@ -150,6 +156,12 @@ public class GestorBD {
 		return null;
 	}
 	
+	/**
+	 * Trae los diagnosticos de un medico
+	 * O(cantDiag)
+	 * @param codMedico
+	 * @return
+	 */
 	public static ArrayList<Diagnostico> consultarDiagnosticosXMedico(int codMedico) {
 		String linea;
 		ArrayList<Diagnostico> diag =new ArrayList<Diagnostico>();
@@ -168,6 +180,7 @@ public class GestorBD {
 	
 	/**
 	 * Trae el ultimo codigo de la ultima linea de un archivo de medicos o pacientes
+	 * O(cantRegistros)
 	 * @param file el archivo a buscar
 	 * @return 	el numero del ultimo codigo, coincidente con la fila analizada, -1 si no se hallaron codigos,
 	 *			null si no se puede acceder al archivo

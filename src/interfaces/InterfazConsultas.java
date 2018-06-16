@@ -41,6 +41,7 @@ public class InterfazConsultas {
 	
 	/**
 	 * Se encarga del proceso de informes.
+	 * O(intentosMenu*intentosFuncion*(medicos+diags*pacientes))
 	 * */
 	public void menuInformes() { 
 		int opc;
@@ -64,6 +65,7 @@ public class InterfazConsultas {
 	
 	/**
 	 * Pantalla para consultar las enfermedades que atiende cada medico
+	 * O(intentos*(medicos+diags))
 	 */
 	private void enfXMed() {
 		int codme;
@@ -104,6 +106,7 @@ public class InterfazConsultas {
 	
 	/**
 	 * Pantalla para listar los pacientes de un medico
+	 * O(intentos*(medicos+diags*pacientes))
 	 */
 	private void listaPacXMed() {
 		int codme;

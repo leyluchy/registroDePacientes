@@ -35,6 +35,7 @@ public class InterfazIngresoDatos {
 	
 	/**
 	 * Se encarga del proceso de ingreso de datos.
+	 * O(intentosMenu*intentosFuncion*(pacientes+medicos))
 	 * */
 	public void menuIngresoDeDatos() {
 		int opc;
@@ -62,6 +63,7 @@ public class InterfazIngresoDatos {
 	
 	/**
 	 * Pantalla para ingresar pacientes
+	 * O(intentos*pacientes)
 	 */
 	private void ingresoPacientes() {
 		String op;
@@ -85,6 +87,7 @@ public class InterfazIngresoDatos {
 	
 	/**
 	 * Pantalla para ingresar diagnosticos
+	 * O(intentos)
 	 */
 	private void ingresoDiagnosticos() {
 		String op;
@@ -114,6 +117,7 @@ public class InterfazIngresoDatos {
 	
 	/**
 	 * Pantalla para ingresar medicos
+	 * O(intentos*medicos)
 	 */
 	private void ingresoMedicos() {
 		String op;

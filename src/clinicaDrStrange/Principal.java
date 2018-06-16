@@ -29,6 +29,8 @@ public class Principal {
 	 * Pide el ingreso de las credenciales y las chequea contra las credenciales
 	 * guardadas.
 	 * No sale hasta que se ingrese un login exitoso.
+	 * 
+	 * O(cantUsuarios*cantIntentos)
 	 * @throws IOException
 	 */
 	private static void login() {

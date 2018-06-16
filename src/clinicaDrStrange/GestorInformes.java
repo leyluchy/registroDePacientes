@@ -1,5 +1,7 @@
 package clinicaDrStrange;
 
+import java.util.List;
+
 public class GestorInformes {
 
 	/**
@@ -9,8 +11,8 @@ public class GestorInformes {
 	 * @param codMed
 	 * @return
 	 */
-	public static Paciente[] traerListaDePacientesPorMedico(int codMed) {
-		return (Paciente[]) GestorBD.traerPacientesXMedico(codMed).toArray();
+	public static List<Paciente> traerListaDePacientesPorMedico(int codMed) {
+		return GestorBD.traerPacientesXMedico(codMed);
 	}
 	
 	/**
@@ -30,7 +32,7 @@ public class GestorInformes {
 	 * @param codMed
 	 * @return
 	 */
-	public static Diagnostico[] traerDiagnosticosDeMedico (int codMed) {
-		return (Diagnostico[]) GestorBD.consultarDiagnosticosXMedico(codMed).toArray();
+	public static List<Diagnostico> traerDiagnosticosDeMedico (int codMed) {
+		return GestorBD.consultarDiagnosticosXMedico(codMed);
 	}
 }

@@ -94,7 +94,7 @@ public class GestorBD {
 			BufferedReader situpac = new BufferedReader(new FileReader(DATOS_DIAGNOSTICO_FILE));
 			
 			while( (linea = situpac.readLine()) != null) {
-				String[] lineaPartida = linea.split("|");
+				String[] lineaPartida = linea.split("\\|");
 				if( Integer.parseInt(lineaPartida[1]) == codMed &&
 						(aux = consultarPaciente(lineaPartida[0])) != null )
 					lista.add(aux);
@@ -116,7 +116,7 @@ public class GestorBD {
 		try {
 			BufferedReader datopac = new BufferedReader(new FileReader(DATOS_PACIENTES_FILE));
 			while((linea = datopac.readLine()) != null) {
-				String[] lineaPartida = linea.split("|");
+				String[] lineaPartida = linea.split("\\|");
 				if(lineaPartida[0].equals(codPaciente)) {
 					Paciente pac = new Paciente(Integer.parseInt(lineaPartida[0]), lineaPartida[1]);
 					datopac.close();
@@ -138,7 +138,7 @@ public class GestorBD {
 		try {
 			BufferedReader datomed= new BufferedReader(new FileReader(DATOS_MEDICOS_FILE));
 			while((linea=datomed.readLine()) != null) {
-				String[] lineaPartida = linea.split("|");
+				String[] lineaPartida = linea.split("\\|");
 				if(codMedico==Integer.parseInt(lineaPartida[0])) {
 					Medico med=new Medico(Integer.parseInt(lineaPartida[0]),lineaPartida[1],lineaPartida[2]);
 					datomed.close();
@@ -156,7 +156,7 @@ public class GestorBD {
 		try {
 			BufferedReader datomed= new BufferedReader(new FileReader(DATOS_MEDICOS_FILE));
 			while((linea=datomed.readLine()) != null) {
-				String[] lineaPartida = linea.split("|");
+				String[] lineaPartida = linea.split("\\|");
 				if(codMedico==Integer.parseInt(lineaPartida[1])) {
 					diag.add(new Diagnostico(Integer.parseInt(lineaPartida[0]),Integer.parseInt(lineaPartida[1]),lineaPartida[2]));
 				}
@@ -182,7 +182,7 @@ public class GestorBD {
 				lastString=actual;	
 			}
 			if(lastString!=null)
-				last=Integer.parseInt(lastString.split("|")[0]);
+				last=Integer.parseInt(lastString.split("\\|")[0]);
 			datomed.close();
 		} catch (IOException e) {
 			return null;

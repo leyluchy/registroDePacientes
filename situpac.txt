@@ -1,3 +1,2 @@
-1 1 Diag11 
-1 2 Diag12 
-2 3 Diag23 
+0|1|Hola
+1|1|Chau

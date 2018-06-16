@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.util.List;
+
 import clinicaDrStrange.Diagnostico;
 import clinicaDrStrange.GestorInformes;
 import clinicaDrStrange.Medico;
@@ -34,9 +36,9 @@ public class InterfazConsultas {
 	 * */
 	public void menuInformes() { 
 		int opc;
-		System.out.println(menuInformes);
 		
 		do {
+			System.out.println(menuInformes);
 			opc = InterfazUsuario.leerEntero();
 			
 			if (opc < 1 || opc > 3)
@@ -69,12 +71,12 @@ public class InterfazConsultas {
 				Medico med = GestorInformes.traerMedico(codme);
 				if(med != null) {
 					//Si el medico existe
-					Diagnostico[] diags = GestorInformes.traerDiagnosticosDeMedico(codme);
-					if(diags != null && diags.length > 0) {
+					List<Diagnostico> diags = GestorInformes.traerDiagnosticosDeMedico(codme);
+					if(diags != null && !diags.isEmpty()) {
 						//Si encontre diagnosticos para ese medico
 						System.out.println("El medico " + med.getNombreYApellido() + " diagnosticó las siguientes enfermedades:");
 						for(Diagnostico d : diags)
-							System.out.println(">>>> " + d.getDiagnostico() + "\n");
+							System.out.println(">>>> " + d.getDiagnostico());
 					}
 					else
 						//Si no encontre diagnosticos o hubo error
@@ -99,7 +101,7 @@ public class InterfazConsultas {
 		int codme;
 		String op;
 		Medico med;
-		Paciente[] listaPac;
+		List<Paciente> listaPac;
 		
 		System.out.println(leyendaPacXMed);
 		do {
@@ -113,12 +115,12 @@ public class InterfazConsultas {
 					
 					//Si existe el medico, busco los pacientes
 					listaPac = GestorInformes.traerListaDePacientesPorMedico(codme);
-					if(listaPac != null && listaPac.length > 0) {
+					if(listaPac != null && !listaPac.isEmpty()) {
 						
 						//Si tiene pacientes, los listo
-						System.out.println("::: El medico " + med.getNombreYApellido() + " atiende a los siguientes pacientes: " + "\n");
+						System.out.println("::: El medico " + med.getNombreYApellido() + " atiende a los siguientes pacientes: ");
 						for(Paciente pac : listaPac)
-							System.out.println("::: Paciente: " + pac.getNombreYApellido() + "\n");
+							System.out.println("::: Paciente: " + pac.getNombreYApellido());
 					}
 					else
 						//Si no tiene pacientes

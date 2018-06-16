@@ -1,3 +1,2 @@
-1 Uno Esp1
-2 Dos Esp2
-3 Tres Esp3
+0|Cristian Flores|Programación
+1|Carla Espinola|Pediatría

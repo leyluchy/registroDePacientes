@@ -31,6 +31,6 @@ public class GestorInformes {
 	 * @return
 	 */
 	public static Diagnostico[] traerDiagnosticosDeMedico (int codMed) {
-		return GestorBD.consultarDiagnosticosXMedicos(codMed);
+		return (Diagnostico[]) GestorBD.consultarDiagnosticosXMedico(codMed).toArray();
 	}
 }

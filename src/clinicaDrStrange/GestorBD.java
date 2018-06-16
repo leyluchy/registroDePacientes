@@ -2,7 +2,6 @@ package clinicaDrStrange;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -151,21 +150,20 @@ public class GestorBD {
 		return null;
 	}
 	
-	public static Diagnostico[] consultarDiagnosticosXMedicos(int codMedico) {
+	public static ArrayList<Diagnostico> consultarDiagnosticosXMedico(int codMedico) {
 		String linea;
+		ArrayList<Diagnostico> diag =new ArrayList<Diagnostico>();
 		try {
 			BufferedReader datomed= new BufferedReader(new FileReader(DATOS_MEDICOS_FILE));
 			while((linea=datomed.readLine()) != null) {
 				String[] lineaPartida = linea.split("|");
-				if(lineaPartida[0].equals(codMedico)) {
-					Medico med=new Medico(Integer.parseInt(lineaPartida[0]),lineaPartida[1],lineaPartida[2]);
-					datomed.close();
-					return med;
+				if(codMedico==Integer.parseInt(lineaPartida[1])) {
+					diag.add(new Diagnostico(Integer.parseInt(lineaPartida[0]),Integer.parseInt(lineaPartida[1]),lineaPartida[2]));
 				}
 			}
 			datomed.close();
 		}catch (IOException e) {}
-		return null;
+		return diag;
 	}
 	
 	/**

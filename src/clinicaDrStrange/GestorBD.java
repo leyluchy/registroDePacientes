@@ -18,7 +18,7 @@ public class GestorBD {
 	/**
 	 * Permite ingresar pacientes en la BD
 	 * @param paciente El paciente ingresado
-	 * @return true si logró ingresar con exito, false en caso contrario
+	 * @return true si logrï¿½ ingresar con exito, false en caso contrario
 	 */
 	public static boolean ingresarPaciente(Paciente paciente) {
 		BufferedWriter datopac;
@@ -30,7 +30,7 @@ public class GestorBD {
 		} catch (IOException e) {
 			return false;
 		}
-		try { //Solo por si no logró cerrar el archivo
+		try { //Solo por si no logrï¿½ cerrar el archivo
 			datopac.close();
 		} catch (IOException e) {}
 		return true;
@@ -39,7 +39,7 @@ public class GestorBD {
 	/**
 	 * Permite ingresar diagnosticos en la BD
 	 * @param diagnostico el diagnostico ingresado
-	 * @return true si logró ingresar con exito, false en caso contrario
+	 * @return true si logrï¿½ ingresar con exito, false en caso contrario
 	 */
 	public static boolean ingresarDiagnostico(Diagnostico diagnostico) {
 		BufferedWriter situpac;
@@ -51,7 +51,7 @@ public class GestorBD {
 		} catch (IOException e) {
 			return false;
 		}
-		try {//Solo por si no logró cerrar el archivo
+		try {//Solo por si no logrï¿½ cerrar el archivo
 			situpac.close();
 		} catch (IOException e) {}
 		return true;
@@ -60,7 +60,7 @@ public class GestorBD {
 	/**
 	 * Permite ingresar medicos en la BD
 	 * @param medico el medico ingresado
-	 * @return true si logró ingresar con exito, false en caso contrario
+	 * @return true si logrï¿½ ingresar con exito, false en caso contrario
 	 */
 	public static boolean ingresarMedico(Medico medico) {
 		BufferedWriter datomed;
@@ -72,7 +72,7 @@ public class GestorBD {
 		} catch (IOException e) {
 			return false;
 		}
-		try {//Solo por si no logró cerrar el archivo
+		try {//Solo por si no logrï¿½ cerrar el archivo
 			datomed.close();
 		} catch (IOException e) {}
 		return true;
@@ -97,9 +97,8 @@ public class GestorBD {
 					medico=new Medico(Integer.parseInt(line[0]),line[1],line[2]);
 					continuar=false;
 				}
-			//DUDA: este close no tiene que ir fuera del while?
-			datomed.close();
 			}
+			datomed.close();
 			
 		} catch (IOException e) {
 			return null;
@@ -133,7 +132,7 @@ public class GestorBD {
 	
 	/**
 	 * Busca un paciente en la BD a traves del codigo pasado como string.
-	 * Si no lo encuentra u ocurre una excepción, devuelve null.
+	 * Si no lo encuentra u ocurre una excepciï¿½n, devuelve null.
 	 * @param codPaciente
 	 * @return
 	 */
@@ -167,12 +166,11 @@ public class GestorBD {
 		try {
 			datomed = new BufferedReader(new FileReader(file));
 			while((actual=datomed.readLine())!=null) {
-				lastString=actual;
-				//DUDA: puede ser que este if y close vayan fuera del while?
-				if(lastString!=null)
-					last=Integer.parseInt(lastString.split("|")[0]);
-				datomed.close();
+				lastString=actual;	
 			}
+			if(lastString!=null)
+				last=Integer.parseInt(lastString.split("|")[0]);
+			datomed.close();
 		} catch (IOException e) {
 			return null;
 		}

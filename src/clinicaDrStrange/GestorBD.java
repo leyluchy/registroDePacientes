@@ -78,37 +78,6 @@ public class GestorBD {
 		return true;
 	}
 	
-	/**
-	 * La consulta de un medico, se usa para consultar su especialdiad
-	 * @param codMed codigo del medico pedido
-	 * @return el objeto Medico buscado
-	 */
-	public static Medico consultarMedico(int codMed) {
-		BufferedReader datomed = null;
-		Medico medico=null;
-		String[] line;
-		String aux;
-		boolean continuar=true;
-		try {
-			datomed = new BufferedReader(new FileReader(DATOS_MEDICOS_FILE));
-			while(continuar && (aux=datomed.readLine())!=null) {
-				line=aux.split("|");
-				if(Integer.parseInt(line[0])==codMed) {
-					medico=new Medico(Integer.parseInt(line[0]),line[1],line[2]);
-					continuar=false;
-				}
-			}
-			datomed.close();
-			
-		} catch (IOException e) {
-			return null;
-		}
-		try {
-			datomed.close();
-		} catch (IOException e) {}
-		return medico;
-	}
-	
 	//Falta traer pacientes por medico
 	/**
 	 * A partir del codigo de un medico busca entre los diagnosticos. Por cada diagnostico
@@ -157,6 +126,28 @@ public class GestorBD {
 			}
 			datopac.close();
 		} catch (IOException e) {}
+		return null;
+	}
+	
+	/**
+	 * La consulta de un medico, se usa para consultar su especialdiad
+	 * @param codMed codigo del medico pedido
+	 * @return el objeto Medico buscado
+	 */
+	private static Medico consultarMedico(String codMedico) {
+		String linea;
+		try {
+			BufferedReader datomed= new BufferedReader(new FileReader(DATOS_MEDICOS_FILE));
+			while((linea=datomed.readLine()) != null) {
+				String[] lineaPartida = linea.split("|");
+				if(lineaPartida[0].equals(codMedico)) {
+					Medico med=new Medico(Integer.parseInt(lineaPartida[0]),lineaPartida[1],lineaPartida[2]);
+					datomed.close();
+					return med;
+				}
+			}
+			datomed.close();
+		}catch (IOException e) {}
 		return null;
 	}
 	

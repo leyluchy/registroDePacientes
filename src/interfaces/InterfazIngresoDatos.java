@@ -69,9 +69,6 @@ public class InterfazIngresoDatos {
 		String nompac;
 		do {
 			System.out.println(leyendaIngresoPac);
-			
-			//System.out.println("Digite el codigo del paciente: ");
-			//codpac = InterfazUsuario.leerEntero();
 			System.out.println("Digite el nombre del paciente: ");
 			nompac = InterfazUsuario.leerCadena();
 			
@@ -126,9 +123,6 @@ public class InterfazIngresoDatos {
 		
 		do {
 			System.out.println(leyendaIngresoMed);
-
-			//System.out.println("Digite el codigo del medico: ");
-			//codmed = InterfazUsuario.leerEntero();
 			System.out.println("Digite el nombre del medico: ");
 			nommed = InterfazUsuario.leerCadena();
 			System.out.println("Digite la especializacion del medico: ");
@@ -137,6 +131,7 @@ public class InterfazIngresoDatos {
 			if(!nommed.isEmpty() && !espmed.isEmpty() &&
 					(codmed = GestorIngresoDatos.ingresoDatosMedico(nommed, espmed)) != null)
 				System.out.println("El médico se guardó con el código " + codmed);
+			else
 				//Si algo se ingreso mal o no lo pudo guardar
 				System.out.println(errorGuardarEl + "médico. " + vuelvaPronto);
 

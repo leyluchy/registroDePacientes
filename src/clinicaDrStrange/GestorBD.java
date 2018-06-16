@@ -2,9 +2,12 @@ package clinicaDrStrange;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GestorBD {
 
@@ -32,6 +35,7 @@ public class GestorBD {
 		} catch (IOException e) {}
 		return true;
 	}
+	
 	/**
 	 * Permite ingresar diagnosticos en la BD
 	 * @param diagnostico el diagnostico ingresado
@@ -93,6 +97,7 @@ public class GestorBD {
 					medico=new Medico(Integer.parseInt(line[0]),line[1],line[2]);
 					continuar=false;
 				}
+			//DUDA: este close no tiene que ir fuera del while?
 			datomed.close();
 			}
 			
@@ -106,6 +111,48 @@ public class GestorBD {
 	}
 	
 	//Falta traer pacientes por medico
+	public static List<Paciente> traerPacientesXMedico(int codMed) {
+		List<Paciente> lista = new ArrayList<Paciente>();
+		Paciente aux;
+		String linea;
+		
+		try {
+			BufferedReader situpac = new BufferedReader(new FileReader(DATOS_DIAGNOSTICO_FILE));
+			
+			while( (linea = situpac.readLine()) != null) {
+				String[] lineaPartida = linea.split("|");
+				if( Integer.parseInt(lineaPartida[1]) == codMed &&
+						(aux = consultarPaciente(lineaPartida[0])) != null )
+					lista.add(aux);
+			}
+			
+			situpac.close();
+		} catch (IOException e) {}
+		return lista;
+	}
+	
+	/**
+	 * Busca un paciente en la BD a traves del codigo pasado como string.
+	 * Si no lo encuentra u ocurre una excepción, devuelve null.
+	 * @param codPaciente
+	 * @return
+	 */
+	private static Paciente consultarPaciente(String codPaciente) {
+		String linea;
+		try {
+			BufferedReader datopac = new BufferedReader(new FileReader(DATOS_PACIENTES_FILE));
+			while((linea = datopac.readLine()) != null) {
+				String[] lineaPartida = linea.split("|");
+				if(lineaPartida[0].equals(codPaciente)) {
+					Paciente pac = new Paciente(Integer.parseInt(lineaPartida[0]), lineaPartida[1]);
+					datopac.close();
+					return pac;
+				}
+			}
+			datopac.close();
+		} catch (IOException e) {}
+		return null;
+	}
 	
 	/**
 	 * Trae el ultimo codigo de la ultima linea de un archivo de medicos o pacientes
@@ -121,6 +168,7 @@ public class GestorBD {
 			datomed = new BufferedReader(new FileReader(file));
 			while((actual=datomed.readLine())!=null) {
 				lastString=actual;
+				//DUDA: puede ser que este if y close vayan fuera del while?
 				if(lastString!=null)
 					last=Integer.parseInt(lastString.split("|")[0]);
 				datomed.close();

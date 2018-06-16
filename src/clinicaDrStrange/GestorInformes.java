@@ -7,6 +7,6 @@ public class GestorInformes {
 	}
 	
 	public static Medico traerMedico(int codMed) {
-		return null;
+		return GestorBD.consultarMedico(codMed);
 	}
 }

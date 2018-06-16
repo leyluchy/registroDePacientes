@@ -27,8 +27,7 @@ public class GestorIngresoDatos {
 	 */
 	public static boolean ingresosituacionPaciente(int codp, int codm, String enfpac) {
 		Diagnostico diag = new Diagnostico(codp, codm, enfpac);
-		GestorBD.ingresarDiagnostico(diag);
-		return false;
+		return GestorBD.ingresarDiagnostico(diag);
 	}
 
 	/**

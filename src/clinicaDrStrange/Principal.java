@@ -17,10 +17,13 @@ public class Principal {
 	}
 	
 	/**
-	 * Autentica al usuario
+	 * Autentica al usuario.
+	 * Pide el ingreso de las credenciales y las chequea contra las credenciales
+	 * guardadas.
+	 * No sale hasta que se ingrese un login exitoso.
 	 * @throws IOException
 	 */
-	public static void login() {
+	private static void login() {
 		String usuario, contrasenia;
 		boolean loginExitoso = false;
 		

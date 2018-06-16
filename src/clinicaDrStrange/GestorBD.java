@@ -134,7 +134,24 @@ public class GestorBD {
 	 * @param codMed codigo del medico pedido
 	 * @return el objeto Medico buscado
 	 */
-	private static Medico consultarMedico(String codMedico) {
+	public static Medico consultarMedico(int codMedico) {
+		String linea;
+		try {
+			BufferedReader datomed= new BufferedReader(new FileReader(DATOS_MEDICOS_FILE));
+			while((linea=datomed.readLine()) != null) {
+				String[] lineaPartida = linea.split("|");
+				if(codMedico==Integer.parseInt(lineaPartida[0])) {
+					Medico med=new Medico(Integer.parseInt(lineaPartida[0]),lineaPartida[1],lineaPartida[2]);
+					datomed.close();
+					return med;
+				}
+			}
+			datomed.close();
+		}catch (IOException e) {}
+		return null;
+	}
+	
+	public static Diagnostico[] consultarDiagnosticosXMedicos(int codMedico) {
 		String linea;
 		try {
 			BufferedReader datomed= new BufferedReader(new FileReader(DATOS_MEDICOS_FILE));

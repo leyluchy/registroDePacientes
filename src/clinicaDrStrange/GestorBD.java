@@ -93,8 +93,8 @@ public class GestorBD {
 					medico=new Medico(Integer.parseInt(line[0]),line[1],line[2]);
 					continuar=false;
 				}
-			datomed.close();
 			}
+			datomed.close();
 			
 		} catch (IOException e) {
 			return null;
@@ -120,11 +120,11 @@ public class GestorBD {
 		try {
 			datomed = new BufferedReader(new FileReader(file));
 			while((actual=datomed.readLine())!=null) {
-				lastString=actual;
-				if(lastString!=null)
-					last=Integer.parseInt(lastString.split("|")[0]);
-				datomed.close();
+				lastString=actual;	
 			}
+			if(lastString!=null)
+				last=Integer.parseInt(lastString.split("|")[0]);
+			datomed.close();
 		} catch (IOException e) {
 			return null;
 		}

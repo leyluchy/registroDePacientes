@@ -1,5 +1,6 @@
 package interfaces;
 
+import clinicaDrStrange.Diagnostico;
 import clinicaDrStrange.GestorInformes;
 import clinicaDrStrange.Medico;
 import clinicaDrStrange.Paciente;
@@ -72,10 +73,23 @@ public class InterfazConsultas {
 			codme = InterfazUsuario.leerEntero();
 			
 			if(codme != -1) {
+				//Si ingreso un codigo valido
 				Medico med = GestorInformes.traerMedico(codme);
-				if(med != null)
-					System.out.println("El medico " + med.getNombreYApellido() + " se especializa en " + med.getEspecializacion() + "\n");
+				if(med != null) {
+					//Si el medico existe
+					Diagnostico[] diags = GestorInformes.traerDiagnosticosDeMedico(codme);
+					if(diags != null && diags.length > 0) {
+						//Si encontre diagnosticos para ese medico
+						System.out.println("El medico " + med.getNombreYApellido() + " diagnosticó las siguientes enfermedades:");
+						for(Diagnostico d : diags)
+							System.out.println(">>>> " + d.getDiagnostico() + "\n");
+					}
+					else
+						//Si no encontre diagnosticos o hubo error
+						System.out.println("El médoco " + med.getNombreYApellido() + " no diagnosticó ninguna enfermedad.");
+				}
 				else
+					//Si no encontre el medico
 					System.out.println("No existe un médico con ese código");
 				}
 			else

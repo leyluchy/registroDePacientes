@@ -110,6 +110,13 @@ public class GestorBD {
 	}
 	
 	//Falta traer pacientes por medico
+	/**
+	 * A partir del codigo de un medico busca entre los diagnosticos. Por cada diagnostico
+	 * que escribio ese medico, busca el paciente en la BD de pacientes y con ellos arma
+	 * una lista de pacientes.
+	 * @param codMed
+	 * @return
+	 */
 	public static List<Paciente> traerPacientesXMedico(int codMed) {
 		List<Paciente> lista = new ArrayList<Paciente>();
 		Paciente aux;

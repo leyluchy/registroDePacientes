@@ -9,8 +9,16 @@ import java.util.Scanner;
 
 import interfaces.InterfazUsuario;
 
+/**
+ * Ejecución del codigo del programa ControlDePacientes
+ * @author alexis
+ *
+ */
 public class Principal {
 	
+	/**
+	 * Ejecución del producto
+	 */
 	public static void main(String args[]) {
 		login();
 		new InterfazUsuario().menuPrincipal();

@@ -4,8 +4,16 @@ import clinicaDrStrange.GestorInformes;
 import clinicaDrStrange.Medico;
 import clinicaDrStrange.Paciente;
 
+/**
+ * Interfaz encargada de las consultas de datos
+ * @author alexis
+ *
+ */
 public class InterfazConsultas {
 	
+	/**
+	 * Son los banners de los menúes
+	 */
 	private final String menuInformes =
 			"   ..............................................." + "\n" +
 			"   :-:  C O N T R O L  D E  P A C I E N T E S  :-:" + "\n" +

@@ -22,4 +22,15 @@ public class GestorInformes {
 	public static Medico traerMedico(int codMed) {
 		return GestorBD.consultarMedico(codMed);
 	}
+	
+	/**
+	 * Busca los diagnosticos que realizo ese medico y los devuelve en un array.
+	 * Si no se encuentran diagnosticos u ocurre un error, devuelve el array
+	 * vacío.
+	 * @param codMed
+	 * @return
+	 */
+	public static Diagnostico[] traerDiagnosticosDeMedico (int codMed) {
+		return GestorBD.consultarDiagnosticosXMedicos(codMed);
+	}
 }

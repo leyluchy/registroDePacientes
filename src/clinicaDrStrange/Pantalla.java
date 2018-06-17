@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.JList;
+import java.awt.Component;
 
 
 public class Pantalla {
@@ -31,6 +32,7 @@ public class Pantalla {
 	private JTextField textNomMed;
 	private JTextField textEsp;
 	private JTextField textMedBuscadoPac;
+	private JTextField textDiagXMed;
 
 	/**
 	 * Launch the application.
@@ -183,6 +185,18 @@ public class Pantalla {
 		panelConsultas.add(btnVolver);
 		
 		JButton btnEnfXMed = new JButton("Enfermedades que atiende cada Medico");
+		btnEnfXMed.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLogin.setTitle("Enfermedades que atiende cada médico");
+				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+			}
+		});
 		btnEnfXMed.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnEnfXMed.setBounds(71, 89, 282, 54);
 		panelConsultas.add(btnEnfXMed);
@@ -444,31 +458,31 @@ public class Pantalla {
 		listPac.setBounds(209, 73, 65, 41);
 		//panelPacXMedicos.add(list);
 		JScrollPane sliderPac= new JScrollPane(listPac);
-		sliderPac.setBounds(10, 50, 411, 130);
+		sliderPac.setBounds(10, 76, 411, 104);
 		panelPacXMedicos.add(sliderPac);
 		
 		JLabel lblCdigoDeMedico = new JLabel("C\u00F3digo de Medico:");
-		lblCdigoDeMedico.setBounds(10, 11, 91, 14);
+		lblCdigoDeMedico.setBounds(10, 46, 91, 14);
 		panelPacXMedicos.add(lblCdigoDeMedico);
 		
 		textMedBuscadoPac = new JTextField();
-		textMedBuscadoPac.setBounds(111, 8, 201, 20);
+		textMedBuscadoPac.setBounds(111, 43, 201, 20);
 		panelPacXMedicos.add(textMedBuscadoPac);
 		textMedBuscadoPac.setColumns(10);
 		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.addActionListener(new ActionListener() {
+		JButton btnBuscarPacXMed = new JButton("Buscar");
+		btnBuscarPacXMed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnBuscar.setBounds(332, 7, 89, 23);
-		panelPacXMedicos.add(btnBuscar);
+		btnBuscarPacXMed.setBounds(332, 42, 89, 23);
+		panelPacXMedicos.add(btnBuscarPacXMed);
 		
 		JButton btnAnterior = new JButton("Anterior");
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textMedBuscadoPac.setText("");
-				
+				//limpiar lista
 				frmLogin.setTitle("Menú de informes");
 				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
 				cl.previous(ventanaPrincipal);
@@ -481,7 +495,46 @@ public class Pantalla {
 		btnAnterior.setBounds(167, 191, 89, 23);
 		panelPacXMedicos.add(btnAnterior);
 		
-		JPanel panelEnfXMed = new JPanel();
-		ventanaPrincipal.add(panelEnfXMed, "name_7583955999448");
+		JPanel panelDiagXMedicos = new JPanel();
+		panelDiagXMedicos.setLayout(null);
+		ventanaPrincipal.add(panelDiagXMedicos, "name_66180703742827");
+		
+		JTextArea listDiag = new JTextArea();
+		listDiag.setBounds(0, 0, 4, 22);
+		//panelDiagXMedicos.add(textArea);
+		
+		JScrollPane sliderDiag = new JScrollPane(listDiag);
+		sliderDiag.setBounds(10, 79, 411, 101);
+		panelDiagXMedicos.add(sliderDiag);
+		
+		JLabel label = new JLabel("C\u00F3digo de Medico:");
+		label.setBounds(10, 49, 91, 14);
+		panelDiagXMedicos.add(label);
+		
+		textDiagXMed = new JTextField();
+		textDiagXMed.setColumns(10);
+		textDiagXMed.setBounds(111, 46, 201, 20);
+		panelDiagXMedicos.add(textDiagXMed);
+		
+		JButton btnBuscarDiagXMed = new JButton("Buscar");
+		btnBuscarDiagXMed.setBounds(332, 45, 89, 23);
+		panelDiagXMedicos.add(btnBuscarDiagXMed);
+		
+		JButton button_4 = new JButton("Anterior");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textDiagXMed.setText("");
+				//limpiar lista
+				frmLogin.setTitle("Menú de informes");
+				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
+				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
+			}
+		});
+		button_4.setBounds(167, 191, 89, 23);
+		panelDiagXMedicos.add(button_4);
 	}
 }

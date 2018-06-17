@@ -12,6 +12,7 @@ import java.awt.CardLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -454,7 +455,7 @@ public class Pantalla {
 		ventanaPrincipal.add(panelPacXMedicos, "name_7565553789194");
 		panelPacXMedicos.setLayout(null);
 		
-		JList listPac = new JList();
+		JList<String> listPac = new JList<String>(new DefaultListModel<>());
 		listPac.setBounds(209, 73, 65, 41);
 		//panelPacXMedicos.add(list);
 		JScrollPane sliderPac= new JScrollPane(listPac);
@@ -499,7 +500,7 @@ public class Pantalla {
 		panelDiagXMedicos.setLayout(null);
 		ventanaPrincipal.add(panelDiagXMedicos, "name_66180703742827");
 		
-		JTextArea listDiag = new JTextArea();
+		JList<String> listDiag = new JList<String>(new DefaultListModel<>());
 		listDiag.setBounds(0, 0, 4, 22);
 		//panelDiagXMedicos.add(textArea);
 		

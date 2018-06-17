@@ -13,8 +13,8 @@ public class GestorInformes {
 	 * @param codMed
 	 * @return
 	 */
-	public static List<Paciente> traerListaDePacientesPorMedico(int codMed) {
-		return GestorBD.traerPacientesXMedico(codMed);
+	public static String[] traerListaDePacientesPorMedico(int codMed) {
+		GestorBD.traerPacientesXMedico(codMed);
 	}
 	
 	/**
@@ -25,7 +25,7 @@ public class GestorInformes {
 	 * @param codMed
 	 * @return
 	 */
-	public static Medico traerMedico(int codMed) {
+	public static String traerMedico(int codMed) {
 		return GestorBD.consultarMedico(codMed);
 	}
 	
@@ -38,7 +38,7 @@ public class GestorInformes {
 	 * @param codMed
 	 * @return
 	 */
-	public static List<Diagnostico> traerDiagnosticosDeMedico (int codMed) {
+	public static String[] traerDiagnosticosDeMedico (int codMed) {
 		return GestorBD.consultarDiagnosticosXMedico(codMed);
 	}
 }

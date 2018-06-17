@@ -31,7 +31,7 @@ public class InterfazConsultas {
 	
 	private final String leyendaEnfXMed =
 			"   ....................................................." + "\n" +
-			"   :-:          - E S P E C I A L I D A D -          :-:" + "\n" +
+			"   :-:          - D I A G N O S T I C O S -          :-:" + "\n" +
 			"   :-:...............................................:-:" + "\n";
 	private final String leyendaPacXMed =
 			"   ....................................................." + "\n" +

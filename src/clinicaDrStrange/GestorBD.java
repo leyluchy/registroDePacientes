@@ -13,6 +13,7 @@ public class GestorBD {
 	public static final String DATOS_PACIENTES_FILE="./datopac.txt";
 	public static final String DATOS_DIAGNOSTICO_FILE="./situpac.txt";
 	public static final String DATOS_MEDICOS_FILE="./datomed.txt";
+	public static final String DATOS_USUARIOS_FILE="./login.in";
 	
 	/**
 	 * Permite ingresar pacientes en la BD
@@ -201,5 +202,25 @@ public class GestorBD {
 			return null;
 		}
 		return new Integer(last);
+	}
+	
+	/**
+	 * Chequea la integridad de los archivos de la BD
+	 * @return true si se encuentran disponibles, false si no es así
+	 */
+	public static boolean checkFilesExistence() {
+		try {
+			BufferedReader x = new BufferedReader(new FileReader(DATOS_USUARIOS_FILE));
+			x.close();
+			x = new BufferedReader(new FileReader(DATOS_PACIENTES_FILE));
+			x.close();
+			x = new BufferedReader(new FileReader(DATOS_DIAGNOSTICO_FILE));
+			x.close();
+			x = new BufferedReader(new FileReader(DATOS_MEDICOS_FILE));
+			x.close();
+			return true;
+		} catch (IOException e) {
+			return false;
+		}
 	}
 }

@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
+import javax.swing.JList;
 
 
 public class Pantalla {
@@ -27,6 +28,9 @@ public class Pantalla {
 	private JTextField textPacienteName;
 	private JTextField textCodMed;
 	private JTextField textCodPac;
+	private JTextField textNomMed;
+	private JTextField textEsp;
+	private JTextField textMedBuscadoPac;
 
 	/**
 	 * Launch the application.
@@ -180,10 +184,21 @@ public class Pantalla {
 		
 		JButton btnEnfXMed = new JButton("Enfermedades que atiende cada Medico");
 		btnEnfXMed.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnEnfXMed.setBounds(71, 96, 282, 47);
+		btnEnfXMed.setBounds(71, 89, 282, 54);
 		panelConsultas.add(btnEnfXMed);
 		
 		JButton btnPacXMed = new JButton("Listado de Pacientes por Medico");
+		btnPacXMed.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLogin.setTitle("Listado de Pacientes por Médico");
+				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+			}
+		});
 		btnPacXMed.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnPacXMed.setBounds(71, 11, 282, 54);
 		panelConsultas.add(btnPacXMed);
@@ -205,6 +220,15 @@ public class Pantalla {
 		panelIngreso.add(btnPaciente);
 		
 		JButton btnMedico = new JButton("Datos del Medico");
+		btnMedico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLogin.setTitle("Ingreso de Personal");
+				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+			}
+		});
 		btnMedico.setBounds(33, 123, 174, 73);
 		btnMedico.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panelIngreso.add(btnMedico);
@@ -241,13 +265,13 @@ public class Pantalla {
 		
 		JLabel lblNombreDelPaciente = new JLabel("Nombre del paciente:");
 		lblNombreDelPaciente.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombreDelPaciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNombreDelPaciente.setBounds(10, 65, 411, 25);
+		lblNombreDelPaciente.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNombreDelPaciente.setBounds(10, 76, 148, 25);
 		panelIngPacientes.add(lblNombreDelPaciente);
 		
 		textPacienteName = new JTextField();
 		textPacienteName.setHorizontalAlignment(SwingConstants.LEFT);
-		textPacienteName.setBounds(10, 101, 411, 25);
+		textPacienteName.setBounds(159, 78, 262, 25);
 		panelIngPacientes.add(textPacienteName);
 		textPacienteName.setColumns(10);
 		
@@ -354,9 +378,108 @@ public class Pantalla {
 		
 		JPanel panelIngMedicos = new JPanel();
 		ventanaPrincipal.add(panelIngMedicos, "name_7547961131497");
+		panelIngMedicos.setLayout(null);
+		
+		JLabel lblNombreDelMdico = new JLabel("Nombre del m\u00E9dico:");
+		lblNombreDelMdico.setBounds(10, 58, 130, 17);
+		lblNombreDelMdico.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombreDelMdico.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panelIngMedicos.add(lblNombreDelMdico);
+		
+		textNomMed = new JTextField();
+		textNomMed.setBounds(150, 58, 271, 20);
+		textNomMed.setHorizontalAlignment(SwingConstants.LEFT);
+		textNomMed.setColumns(10);
+		panelIngMedicos.add(textNomMed);
+		
+		JLabel lblEspecialidadMdica = new JLabel("Especialidad m\u00E9dica:");
+		lblEspecialidadMdica.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEspecialidadMdica.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEspecialidadMdica.setBounds(10, 107, 130, 17);
+		panelIngMedicos.add(lblEspecialidadMdica);
+		
+		textEsp = new JTextField();
+		textEsp.setHorizontalAlignment(SwingConstants.LEFT);
+		textEsp.setColumns(10);
+		textEsp.setBounds(150, 107, 271, 20);
+		panelIngMedicos.add(textEsp);
+		
+		JButton button_1 = new JButton("A\u00F1adir");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Integer codmed;
+				if(Utilidades.textoDeCajaValido(textNomMed.getText()) && Utilidades.textoDeCajaValido(textEsp.getText())) {
+					if((codmed = GestorIngresoDatos.ingresoDatosMedico(textNomMed.getText(), textEsp.getText())) != null)
+						JOptionPane.showMessageDialog(null, "Médico guardado con código: "+codmed.intValue(), "Código", JOptionPane.INFORMATION_MESSAGE);
+					else 
+						JOptionPane.showMessageDialog(null, "Error de acceso a la Base de Datos", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				else
+					JOptionPane.showMessageDialog(null, "Campos vacíos o con caracteres invalidos", "Error", JOptionPane.ERROR_MESSAGE);
+				textNomMed.setText("");
+				textEsp.setText("");
+			}
+		});
+		button_1.setBounds(74, 168, 89, 23);
+		panelIngMedicos.add(button_1);
+		
+		JButton button_2 = new JButton("Anterior");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLogin.setTitle("Registro de Pacientes");
+				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
+				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
+			}
+		});
+		button_2.setBounds(236, 168, 89, 23);
+		panelIngMedicos.add(button_2);
 		
 		JPanel panelPacXMedicos = new JPanel();
 		ventanaPrincipal.add(panelPacXMedicos, "name_7565553789194");
+		panelPacXMedicos.setLayout(null);
+		
+		JList listPac = new JList();
+		listPac.setBounds(209, 73, 65, 41);
+		//panelPacXMedicos.add(list);
+		JScrollPane sliderPac= new JScrollPane(listPac);
+		sliderPac.setBounds(10, 50, 411, 130);
+		panelPacXMedicos.add(sliderPac);
+		
+		JLabel lblCdigoDeMedico = new JLabel("C\u00F3digo de Medico:");
+		lblCdigoDeMedico.setBounds(10, 11, 91, 14);
+		panelPacXMedicos.add(lblCdigoDeMedico);
+		
+		textMedBuscadoPac = new JTextField();
+		textMedBuscadoPac.setBounds(111, 8, 201, 20);
+		panelPacXMedicos.add(textMedBuscadoPac);
+		textMedBuscadoPac.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBuscar.setBounds(332, 7, 89, 23);
+		panelPacXMedicos.add(btnBuscar);
+		
+		JButton btnAnterior = new JButton("Anterior");
+		btnAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textMedBuscadoPac.setText("");
+				
+				frmLogin.setTitle("Menú de informes");
+				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
+				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
+			}
+		});
+		btnAnterior.setBounds(167, 191, 89, 23);
+		panelPacXMedicos.add(btnAnterior);
 		
 		JPanel panelEnfXMed = new JPanel();
 		ventanaPrincipal.add(panelEnfXMed, "name_7583955999448");

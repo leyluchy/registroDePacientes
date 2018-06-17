@@ -1,7 +1,6 @@
 package clinicaDrStrange;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GestorInformes {
 
@@ -15,11 +14,11 @@ public class GestorInformes {
 	 * @param codMed
 	 * @return
 	 */
-	public static String[] traerListaDePacientesPorMedico(int codMed) {
-		List<String> nombres = new LinkedList<String>();
+	public static ArrayList<String> traerListaDePacientesPorMedico(int codMed) {
+		ArrayList<String> nombres = new ArrayList<String>();
 		for(Paciente pac : GestorBD.traerPacientesXMedico(codMed))
 			nombres.add(pac.getNombreYApellido());
-		return nombres.toArray(null);
+		return nombres;
 	}
 	
 	/**
@@ -47,10 +46,10 @@ public class GestorInformes {
 	 * @param codMed
 	 * @return
 	 */
-	public static String[] traerDiagnosticosDeMedico (int codMed) {
-		List<String> diags = new LinkedList<String>();
+	public static ArrayList<String> traerDiagnosticosDeMedico (int codMed) {
+		ArrayList<String> diags = new ArrayList<String>();
 		for(Diagnostico d : GestorBD.consultarDiagnosticosXMedico(codMed))
 			diags.add(d.getDiagnostico());
-		return diags.toArray(null);
+		return diags;
 	}
 }

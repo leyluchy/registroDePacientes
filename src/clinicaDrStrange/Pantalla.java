@@ -2,6 +2,7 @@ package clinicaDrStrange;
 
 import java.awt.EventQueue;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -114,7 +115,7 @@ public class Pantalla {
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					if(Principal.login(textFieldUsername.getText(), textFieldPass.getText())) {
+					if(Login.login(textFieldUsername.getText(), textFieldPass.getText())) {
 						JOptionPane.showMessageDialog(null, "Ingreso exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
 						frmLogin.setTitle("Registro de Pacientes");
 						CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
@@ -318,6 +319,12 @@ public class Pantalla {
 		btnAnterior2.setBounds(236, 169, 117, 23);
 		panelIngPacientes.add(btnAnterior2);
 		
+		JLabel lblIngresoDePacientes = new JLabel("Ingreso de Pacientes");
+		lblIngresoDePacientes.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIngresoDePacientes.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblIngresoDePacientes.setBounds(10, 11, 411, 23);
+		panelIngPacientes.add(lblIngresoDePacientes);
+		
 		JPanel panelIngDiagnosticos = new JPanel();
 		ventanaPrincipal.add(panelIngDiagnosticos, "name_7536857381278");
 		panelIngDiagnosticos.setLayout(null);
@@ -390,6 +397,12 @@ public class Pantalla {
 		buttonVolver3.setBounds(233, 175, 89, 23);
 		panelIngDiagnosticos.add(buttonVolver3);
 		
+		JLabel lblNewLabel = new JLabel("Ingreso de Diagnosticos");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(10, 11, 411, 23);
+		panelIngDiagnosticos.add(lblNewLabel);
+		
 		JPanel panelIngMedicos = new JPanel();
 		ventanaPrincipal.add(panelIngMedicos, "name_7547961131497");
 		panelIngMedicos.setLayout(null);
@@ -450,6 +463,12 @@ public class Pantalla {
 		button_2.setBounds(236, 168, 89, 23);
 		panelIngMedicos.add(button_2);
 		
+		JLabel lblIngresoDeMdicos = new JLabel("Ingreso de M\u00E9dicos");
+		lblIngresoDeMdicos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIngresoDeMdicos.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblIngresoDeMdicos.setBounds(10, 11, 411, 23);
+		panelIngMedicos.add(lblIngresoDeMdicos);
+		
 		JPanel panelPacXMedicos = new JPanel();
 		ventanaPrincipal.add(panelPacXMedicos, "name_7565553789194");
 		panelPacXMedicos.setLayout(null);
@@ -474,10 +493,19 @@ public class Pantalla {
 		btnBuscarPacXMed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Utilidades.textoDeCajaValido(textMedBuscadorPac.getText()) && Utilidades.isNumber(textMedBuscadorPac.getText())) {
-					String nomMed = GestorInformes.traerMedico(textMedBuscadorPac.getText());
-					if((nomMed = GestorInformes.traerMedico(codMed))) {
-					
+					String nomMed = GestorInformes.traerMedico(Integer.parseInt(textMedBuscadorPac.getText()));
+					if(nomMed != null) {
+					ArrayList<String> listaPac=GestorInformes.traerListaDePacientesPorMedico(Integer.parseInt(textMedBuscadorPac.getText()));
+						if(listaPac != null && !listaPac.isEmpty()) {
+							((DefaultListModel<String>) listPac.getModel()).addElement("El medico " + nomMed + " atiende a los siguientes pacientes: ");
+							for(String nombrePaciente : listaPac)
+								((DefaultListModel<String>) listPac.getModel()).addElement(nombrePaciente);
+						}
+						else
+							JOptionPane.showMessageDialog(null, "El médico "+nomMed+" no atiende a ningun paciente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 					}
+					else
+						JOptionPane.showMessageDialog(null, "Médico inexistente o error de acceso a la Base de datos", "Error", JOptionPane.ERROR_MESSAGE);
 				}else
 					JOptionPane.showMessageDialog(null, "Campo vacío o con caracteres invalidos", "Error", JOptionPane.ERROR_MESSAGE);
 			}
@@ -490,6 +518,7 @@ public class Pantalla {
 			public void actionPerformed(ActionEvent e) {
 				textMedBuscadorPac.setText("");
 				//limpiar lista
+				((DefaultListModel<String>) listPac.getModel()).removeAllElements();
 				frmLogin.setTitle("Menú de informes");
 				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
 				cl.previous(ventanaPrincipal);
@@ -501,6 +530,12 @@ public class Pantalla {
 		});
 		btnAnterior.setBounds(167, 191, 89, 23);
 		panelPacXMedicos.add(btnAnterior);
+		
+		JLabel lblListadoDePacientes = new JLabel("Listado de Pacientes por M\u00E9dico");
+		lblListadoDePacientes.setHorizontalAlignment(SwingConstants.CENTER);
+		lblListadoDePacientes.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblListadoDePacientes.setBounds(10, 11, 411, 23);
+		panelPacXMedicos.add(lblListadoDePacientes);
 		
 		JPanel panelDiagXMedicos = new JPanel();
 		panelDiagXMedicos.setLayout(null);
@@ -524,6 +559,26 @@ public class Pantalla {
 		panelDiagXMedicos.add(textDiagXMed);
 		
 		JButton btnBuscarDiagXMed = new JButton("Buscar");
+		btnBuscarDiagXMed.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Utilidades.textoDeCajaValido(textDiagXMed.getText()) && Utilidades.isNumber(textDiagXMed.getText())) {
+					String nomMed = GestorInformes.traerMedico(Integer.parseInt(textDiagXMed.getText()));
+					if(nomMed != null) {
+					ArrayList<String> listaDiag=GestorInformes.traerDiagnosticosDeMedico(Integer.parseInt(textDiagXMed.getText()));
+						if(listaDiag != null && !listaDiag.isEmpty()) {
+							((DefaultListModel<String>) listDiag.getModel()).addElement("El medico " + nomMed + " realizó los siguientes diagnosticos: ");
+							for(String diagnostico : listaDiag)
+								((DefaultListModel<String>) listDiag.getModel()).addElement(diagnostico);
+						}
+						else
+							JOptionPane.showMessageDialog(null, "El médico "+nomMed+" no diagnosticó ninguna enfermedad", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+					}
+					else
+						JOptionPane.showMessageDialog(null, "Médico inexistente o error de acceso a la Base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+				}else
+					JOptionPane.showMessageDialog(null, "Campo vacío o con caracteres invalidos", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		});
 		btnBuscarDiagXMed.setBounds(332, 45, 89, 23);
 		panelDiagXMedicos.add(btnBuscarDiagXMed);
 		
@@ -539,9 +594,16 @@ public class Pantalla {
 				cl.previous(ventanaPrincipal);
 				cl.previous(ventanaPrincipal);
 				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
 			}
 		});
 		button_4.setBounds(167, 191, 89, 23);
 		panelDiagXMedicos.add(button_4);
+		
+		JLabel lblListadoDeDiagnosticos = new JLabel("Listado de Diagnosticos por M\u00E9dico");
+		lblListadoDeDiagnosticos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblListadoDeDiagnosticos.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblListadoDeDiagnosticos.setBounds(10, 11, 411, 23);
+		panelDiagXMedicos.add(lblListadoDeDiagnosticos);
 	}
 }

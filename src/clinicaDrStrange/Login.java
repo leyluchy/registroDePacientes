@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @author alexis
  *
  */
-public class Principal {
+public class Login {
 	
 	/**
 	 * Ejecución del producto

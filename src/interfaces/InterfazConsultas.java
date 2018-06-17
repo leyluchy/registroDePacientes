@@ -1,12 +1,5 @@
 package interfaces;
 
-import java.util.List;
-
-import clinicaDrStrange.Diagnostico;
-import clinicaDrStrange.GestorInformes;
-import clinicaDrStrange.Medico;
-import clinicaDrStrange.Paciente;
-
 /**
  * Interfaz encargada de las consultas de datos
  * @author alexis
@@ -29,16 +22,16 @@ public class InterfazConsultas {
 			"   ..............................................." + "\n" +
 			"   ....Elija la opcion deseada: ";
 	
-	private final String leyendaEnfXMed =
+	/*private final String leyendaEnfXMed =
 			"   ....................................................." + "\n" +
 			"   :-:          - D I A G N O S T I C O S -          :-:" + "\n" +
-			"   :-:...............................................:-:" + "\n";
-	private final String leyendaPacXMed =
+			"   :-:...............................................:-:" + "\n";*/
+	/*private final String leyendaPacXMed =
 			"   ....................................................." + "\n" +
 			"   :-:        - L I S T A   P A C I E N T E S -         " + "\n" +
 			"   :-:            - P O R   M E D I C O -            :-:" + "\n" +
 			"   :-:...............................................:-:" + "\n";
-	
+	*/
 	/**
 	 * Se encarga del proceso de informes.
 	 * O(intentosMenu*intentosFuncion*(medicos+diags*pacientes))
@@ -54,10 +47,10 @@ public class InterfazConsultas {
 				System.out.println(InterfazUsuario.errorOpcionIncorrecta);
 			switch (opc) {
 			case 1:
-				listaPacXMed();
+				//listaPacXMed();
 				break;
 			case 2:
-				enfXMed();
+				//enfXMed();
 				break;
 			}
 		} while (opc != 3);
@@ -67,7 +60,7 @@ public class InterfazConsultas {
 	 * Pantalla para consultar las enfermedades que atiende cada medico
 	 * O(intentos*(medicos+diags))
 	 */
-	private void enfXMed() {
+	/*private void enfXMed() {
 		int codme;
 		String op;
 		
@@ -102,13 +95,13 @@ public class InterfazConsultas {
 			System.out.println("¿Desea consultar otro médico? S/N" + "\n");
 			op = InterfazUsuario.leerCadena();
 		} while (op.equals("S") || op.equals("s"));
-	}
+	}*/
 	
 	/**
 	 * Pantalla para listar los pacientes de un medico
 	 * O(intentos*(medicos+diags*pacientes))
 	 */
-	private void listaPacXMed() {
+	/*private void listaPacXMed() {
 		int codme;
 		String op;
 		Medico med;
@@ -148,5 +141,5 @@ public class InterfazConsultas {
 			System.out.println("¿Desea consultar otro médico? S/N" + "\n");
 			op = InterfazUsuario.leerCadena();
 		} while (op.equals("S") || op.equals("s"));
-	}
+	}*/
 }

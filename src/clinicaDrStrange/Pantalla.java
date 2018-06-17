@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.CardLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -13,12 +15,18 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
+
 
 public class Pantalla {
 
 	private JFrame frmLogin;
 	private JTextField textFieldUsername;
 	private JTextField textFieldPass;
+	private JTextField textPacienteName;
+	private JTextField textCodMed;
+	private JTextField textCodPac;
 
 	/**
 	 * Launch the application.
@@ -185,6 +193,13 @@ public class Pantalla {
 		panelIngreso.setLayout(null);
 		
 		JButton btnPaciente = new JButton("Datos del Paciente");
+		btnPaciente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLogin.setTitle("Ingreso de Pacientes");
+				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
+				cl.next(ventanaPrincipal);
+			}
+		});
 		btnPaciente.setBounds(33, 27, 174, 73);
 		btnPaciente.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panelIngreso.add(btnPaciente);
@@ -195,6 +210,14 @@ public class Pantalla {
 		panelIngreso.add(btnMedico);
 		
 		JButton btnDiagnostico = new JButton("Situaci\u00F3n del Paciente");
+		btnDiagnostico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLogin.setTitle("Ingreso de Diagnosticos");
+				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
+				cl.next(ventanaPrincipal);
+				cl.next(ventanaPrincipal);
+			}
+		});
 		btnDiagnostico.setBounds(217, 27, 185, 73);
 		btnDiagnostico.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panelIngreso.add(btnDiagnostico);
@@ -214,9 +237,120 @@ public class Pantalla {
 		
 		JPanel panelIngPacientes = new JPanel();
 		ventanaPrincipal.add(panelIngPacientes, "name_7523786327087");
+		panelIngPacientes.setLayout(null);
+		
+		JLabel lblNombreDelPaciente = new JLabel("Nombre del paciente:");
+		lblNombreDelPaciente.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombreDelPaciente.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNombreDelPaciente.setBounds(10, 65, 411, 25);
+		panelIngPacientes.add(lblNombreDelPaciente);
+		
+		textPacienteName = new JTextField();
+		textPacienteName.setHorizontalAlignment(SwingConstants.LEFT);
+		textPacienteName.setBounds(10, 101, 411, 25);
+		panelIngPacientes.add(textPacienteName);
+		textPacienteName.setColumns(10);
+		
+		JButton btnIngresarPaciente = new JButton("A\u00F1adir");
+		btnIngresarPaciente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			Integer codpac;
+			if(Utilidades.textoDeCajaValido(textPacienteName.getText())) {
+				if((codpac = GestorIngresoDatos.ingresoDatosPaciente(textPacienteName.getText())) != null)
+					JOptionPane.showMessageDialog(null, "Paciente guardado con código: "+codpac.intValue(), "Código", JOptionPane.INFORMATION_MESSAGE);
+				else 
+					JOptionPane.showMessageDialog(null, "Error de acceso a la Base de Datos", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			else
+				JOptionPane.showMessageDialog(null, "Campo vacío o con caracteres invalidos", "Error", JOptionPane.ERROR_MESSAGE);
+			textPacienteName.setText("");
+			}
+		});
+		btnIngresarPaciente.setBounds(89, 169, 117, 23);
+		panelIngPacientes.add(btnIngresarPaciente);
+		
+		JButton btnAnterior2 = new JButton("Anterior");
+		btnAnterior2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmLogin.setTitle("Menú de ingreso de datos");
+				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
+				cl.previous(ventanaPrincipal);
+			}
+		});
+		btnAnterior2.setBounds(236, 169, 117, 23);
+		panelIngPacientes.add(btnAnterior2);
 		
 		JPanel panelIngDiagnosticos = new JPanel();
 		ventanaPrincipal.add(panelIngDiagnosticos, "name_7536857381278");
+		panelIngDiagnosticos.setLayout(null);
+		
+		JLabel lblCdigoDeMdico = new JLabel("C\u00F3digo de M\u00E9dico");
+		lblCdigoDeMdico.setBounds(10, 37, 92, 23);
+		panelIngDiagnosticos.add(lblCdigoDeMdico);
+		
+		textCodMed = new JTextField();
+		textCodMed.setBounds(108, 37, 313, 23);
+		panelIngDiagnosticos.add(textCodMed);
+		textCodMed.setColumns(10);
+		
+		JLabel lblCdigoDePaciente = new JLabel("C\u00F3digo de Paciente");
+		lblCdigoDePaciente.setBounds(10, 76, 92, 23);
+		panelIngDiagnosticos.add(lblCdigoDePaciente);
+		
+		textCodPac = new JTextField();
+		textCodPac.setColumns(10);
+		textCodPac.setBounds(108, 71, 313, 23);
+		panelIngDiagnosticos.add(textCodPac);
+		
+		JLabel lblDiagnostico = new JLabel("Diagnostico");
+		lblDiagnostico.setBounds(10, 110, 92, 23);
+		panelIngDiagnosticos.add(lblDiagnostico);
+		
+		JTextArea textDiagnostico = new JTextArea();
+		textDiagnostico.setWrapStyleWord(true);
+		textDiagnostico.setLineWrap(true);
+		textDiagnostico.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textDiagnostico.setBounds(108, 105, 313, 59);
+		//panelIngDiagnosticos.add(textDiagnostico);
+		
+		JScrollPane textScroll = new JScrollPane(textDiagnostico);
+		textScroll.setBounds(108, 105, 313, 59);
+		panelIngDiagnosticos.add(textScroll);
+		
+		
+		JButton btnIngDiagnostico = new JButton("A\u00F1adir");
+		btnIngDiagnostico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Utilidades.textoDeCajaValido(textCodMed.getText()) && Utilidades.isNumber(textCodMed.getText())
+						&& Utilidades.textoDeCajaValido(textCodPac.getText()) && Utilidades.isNumber(textCodPac.getText())
+						&& Utilidades.textoDeCajaValido(textDiagnostico.getText())) {
+					if(GestorIngresoDatos.ingresosituacionPaciente(Integer.parseInt(textCodPac.getText()), Integer.parseInt(textCodMed.getText()), textDiagnostico.getText()))
+						JOptionPane.showMessageDialog(null, "Guardado de diagnostico exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+					else 
+						JOptionPane.showMessageDialog(null, "Error de acceso a la Base de Datos", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				else
+					JOptionPane.showMessageDialog(null, "Campos vacíos o con caracteres invalidos", "Error", JOptionPane.ERROR_MESSAGE);
+				textCodMed.setText("");
+				textCodPac.setText("");
+				textDiagnostico.setText("");
+				
+			}
+		});
+		btnIngDiagnostico.setBounds(71, 175, 89, 23);
+		panelIngDiagnosticos.add(btnIngDiagnostico);
+		
+		JButton buttonVolver3 = new JButton("Anterior");
+		buttonVolver3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLogin.setTitle("Menú de ingreso de datos");
+				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
+				cl.previous(ventanaPrincipal);
+				cl.previous(ventanaPrincipal);
+			}
+		});
+		buttonVolver3.setBounds(233, 175, 89, 23);
+		panelIngDiagnosticos.add(buttonVolver3);
 		
 		JPanel panelIngMedicos = new JPanel();
 		ventanaPrincipal.add(panelIngMedicos, "name_7547961131497");

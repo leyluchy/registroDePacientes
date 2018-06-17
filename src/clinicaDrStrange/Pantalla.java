@@ -136,6 +136,7 @@ public class Pantalla {
 		JButton btnConsultas = new JButton("Informes");
 		btnConsultas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmLogin.setTitle("Menú de informes");
 				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());
 				cl.next(ventanaPrincipal);
 			}

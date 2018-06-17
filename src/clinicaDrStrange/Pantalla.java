@@ -19,7 +19,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.JList;
-import java.awt.Component;
 
 
 public class Pantalla {
@@ -32,7 +31,7 @@ public class Pantalla {
 	private JTextField textCodPac;
 	private JTextField textNomMed;
 	private JTextField textEsp;
-	private JTextField textMedBuscadoPac;
+	private JTextField textMedBuscadorPac;
 	private JTextField textDiagXMed;
 
 	/**
@@ -466,14 +465,21 @@ public class Pantalla {
 		lblCdigoDeMedico.setBounds(10, 46, 91, 14);
 		panelPacXMedicos.add(lblCdigoDeMedico);
 		
-		textMedBuscadoPac = new JTextField();
-		textMedBuscadoPac.setBounds(111, 43, 201, 20);
-		panelPacXMedicos.add(textMedBuscadoPac);
-		textMedBuscadoPac.setColumns(10);
+		textMedBuscadorPac = new JTextField();
+		textMedBuscadorPac.setBounds(111, 43, 201, 20);
+		panelPacXMedicos.add(textMedBuscadorPac);
+		textMedBuscadorPac.setColumns(10);
 		
 		JButton btnBuscarPacXMed = new JButton("Buscar");
 		btnBuscarPacXMed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(Utilidades.textoDeCajaValido(textMedBuscadorPac.getText()) && Utilidades.isNumber(textMedBuscadorPac.getText())) {
+					String nomMed = GestorInformes.traerMedico(textMedBuscadorPac.getText());
+					if((nomMed = GestorInformes.traerMedico(codMed))) {
+					
+					}
+				}else
+					JOptionPane.showMessageDialog(null, "Campo vacío o con caracteres invalidos", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		btnBuscarPacXMed.setBounds(332, 42, 89, 23);
@@ -482,7 +488,7 @@ public class Pantalla {
 		JButton btnAnterior = new JButton("Anterior");
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textMedBuscadoPac.setText("");
+				textMedBuscadorPac.setText("");
 				//limpiar lista
 				frmLogin.setTitle("Menú de informes");
 				CardLayout cl = (CardLayout) (ventanaPrincipal.getLayout());

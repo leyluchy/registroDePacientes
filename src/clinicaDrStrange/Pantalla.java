@@ -492,6 +492,7 @@ public class Pantalla {
 		JButton btnBuscarPacXMed = new JButton("Buscar");
 		btnBuscarPacXMed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				((DefaultListModel<String>) listPac.getModel()).removeAllElements();
 				if(Utilidades.textoDeCajaValido(textMedBuscadorPac.getText()) && Utilidades.isNumber(textMedBuscadorPac.getText())) {
 					String nomMed = GestorInformes.traerMedico(Integer.parseInt(textMedBuscadorPac.getText()));
 					if(nomMed != null) {
@@ -508,6 +509,7 @@ public class Pantalla {
 						JOptionPane.showMessageDialog(null, "Médico inexistente o error de acceso a la Base de datos", "Error", JOptionPane.ERROR_MESSAGE);
 				}else
 					JOptionPane.showMessageDialog(null, "Campo vacío o con caracteres invalidos", "Error", JOptionPane.ERROR_MESSAGE);
+				textMedBuscadorPac.setText("");
 			}
 		});
 		btnBuscarPacXMed.setBounds(332, 42, 89, 23);
@@ -561,6 +563,7 @@ public class Pantalla {
 		JButton btnBuscarDiagXMed = new JButton("Buscar");
 		btnBuscarDiagXMed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				((DefaultListModel<String>) listDiag.getModel()).removeAllElements();
 				if(Utilidades.textoDeCajaValido(textDiagXMed.getText()) && Utilidades.isNumber(textDiagXMed.getText())) {
 					String nomMed = GestorInformes.traerMedico(Integer.parseInt(textDiagXMed.getText()));
 					if(nomMed != null) {
@@ -577,6 +580,7 @@ public class Pantalla {
 						JOptionPane.showMessageDialog(null, "Médico inexistente o error de acceso a la Base de datos", "Error", JOptionPane.ERROR_MESSAGE);
 				}else
 					JOptionPane.showMessageDialog(null, "Campo vacío o con caracteres invalidos", "Error", JOptionPane.ERROR_MESSAGE);
+				textDiagXMed.setText("");
 			}
 		});
 		btnBuscarDiagXMed.setBounds(332, 45, 89, 23);
